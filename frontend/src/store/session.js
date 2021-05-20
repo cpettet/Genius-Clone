@@ -1,20 +1,4 @@
 import { csrfFetch } from "./csrf";
-/*
-if user:
-{
-  user: {
-    id,
-    email,
-    username,
-    createdAt,
-    updatedAt
-  }
-}
-default/else:
-{
-  user: null
-}
-*/
 
 const SET = "/session/SET";
 const UNSET = "/session/UNSET";
@@ -23,7 +7,7 @@ const initialState = {
   user: null,
 };
 
-const setSessionUser = (user) => ({
+const setSessionUser = user => ({
   type: SET,
   user,
 });
@@ -33,19 +17,38 @@ const unsetSessionUser = () => ({
   user: null,
 });
 
+export const loginUser = ({ credential, password }) => async dispatch => {
+  const res = await csrfFetch("/api/session", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", },
+    body: JSON.stringify({
+      credential,
+      password
+    }),
+  });
+
+  if (res.ok) {
+    const user = await res.json();
+    dispatch(setSessionUser(user))
+    return user;
+  }
+}
+
 const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET:
       return {
         ...state,
-        user: action.user
+        user: action.user,
       };
     case UNSET:
       return {
         ...state,
         user: action.user
-      };
+      }
     default:
       return state;
   }
 };
+
+export default sessionReducer;
