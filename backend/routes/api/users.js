@@ -32,7 +32,7 @@ const validateSignup = [
   handleValidationErrors,
 ];
 
-// Signup
+// Signup: /api/users
 router.post(
   "/",
   validateSignup,

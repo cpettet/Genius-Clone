@@ -7,7 +7,7 @@ const initialState = {
   user: null,
 };
 
-const setSessionUser = user => ({
+const setSessionUser = (user) => ({
   type: SET,
   user,
 });
@@ -16,22 +16,40 @@ const unsetSessionUser = () => ({
   type: UNSET,
 });
 
-export const loginUser = ({ credential, password }) => async dispatch => {
+export const checkUserLogin = () => async (dispatch) => {
   const res = await csrfFetch("/api/session", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", },
-    body: JSON.stringify({
-      credential,
-      password
-    }),
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
   });
-
   if (res.ok) {
     const user = await res.json();
-    dispatch(setSessionUser(user))
+    dispatch(setSessionUser(user));
     return user;
   }
+};
+
+export const signupUser = () => async (dispatch) => {
+  
 }
+
+export const loginUser =
+  ({ credential, password }) =>
+  async (dispatch) => {
+    const res = await csrfFetch("/api/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        credential,
+        password,
+      }),
+    });
+
+    if (res.ok) {
+      const user = await res.json();
+      dispatch(setSessionUser(user));
+      return user;
+    }
+  };
 
 const sessionReducer = (state = initialState, action) => {
   let newState;
