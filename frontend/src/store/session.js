@@ -14,7 +14,6 @@ const setSessionUser = user => ({
 
 const unsetSessionUser = () => ({
   type: UNSET,
-  user: null,
 });
 
 export const loginUser = ({ credential, password }) => async dispatch => {
@@ -35,6 +34,7 @@ export const loginUser = ({ credential, password }) => async dispatch => {
 }
 
 const sessionReducer = (state = initialState, action) => {
+  let newState;
   switch (action.type) {
     case SET:
       return {
@@ -42,10 +42,9 @@ const sessionReducer = (state = initialState, action) => {
         user: action.user,
       };
     case UNSET:
-      return {
-        ...state,
-        user: action.user
-      }
+      newState = Object.assign({}, state);
+      newState.user = null;
+      return newState;
     default:
       return state;
   }

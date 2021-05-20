@@ -1,0 +1,51 @@
+html {
+  display: flex;
+  font-family: "Programme", "Arial", sans-serif;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  padding: 1rem;
+  width: fit-content;
+}
+
+input {
+  width: 95%;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-family: "Programme Narrow", "Arial Narrow", sans-serif;
+}
+
+.form__error-header {
+  padding: 0px;
+  margin-bottom: 0rem;
+}
+
+.errors {
+  margin-top: 0.25rem;
+}
+
+.input-container {
+  margin: 0.25rem;
+  width: max-content;
+}
+
+.signup {
+  font-size: 0.75rem;
+}
+
+.hyperlink a {
+  text-decoration: none;
+}
