@@ -23,14 +23,31 @@ export const checkUserLogin = () => async (dispatch) => {
   });
   if (res.ok) {
     const user = await res.json();
+    console.log("User: ", user)
     dispatch(setSessionUser(user));
     return user;
   }
 };
 
-export const signupUser = () => async (dispatch) => {
-  
-}
+export const signupUser =
+  ({ username, email, password }) =>
+  async (dispatch) => {
+    const res = await csrfFetch("/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+    });
+
+    if (res.ok) {
+      const user = await res.json();
+      dispatch(setSessionUser(user));
+      return user;
+    }
+  };
 
 export const loginUser =
   ({ credential, password }) =>

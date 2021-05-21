@@ -64,7 +64,7 @@ const LoginFormPage = () => {
       <p className="signup">
         Don't have an account?{" "}
         <span className="hyperlink">
-          <a href="/users/create">Sign up here.</a>
+          <a href="/signup">Sign up here.</a>
         </span>
       </p>
     </form>
