@@ -1,20 +1,15 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
-import "./signup-form-page.module.css";
+import "./signup-form.module.css";
 
-export default function SignupFormPage() {
-  const sessionUser = useSelector((state) => state.session.user);
+export default function SignupForm() {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
-
-  if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +25,6 @@ export default function SignupFormPage() {
     });
   };
 
-  // need buttons for submit, demo, login page
   return (
     <form onSubmit={handleSubmit}>
       <h1>sign up</h1>
