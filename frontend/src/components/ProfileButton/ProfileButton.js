@@ -4,7 +4,6 @@ import styles from "./profile-button.module.css";
 import * as sessionActions from "../../store/session";
 
 const ProfileButton = ({user}) => {
-  console.log(user);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
