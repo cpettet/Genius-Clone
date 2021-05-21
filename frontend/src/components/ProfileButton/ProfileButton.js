@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./profile-button.module.css";
 import * as sessionActions from "../../store/session";
