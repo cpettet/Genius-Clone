@@ -23,7 +23,6 @@ export const checkUserLogin = () => async (dispatch) => {
   });
   if (res.ok) {
     const user = await res.json();
-    console.log("User: ", user)
     dispatch(setSessionUser(user));
     return user;
   }
@@ -67,6 +66,17 @@ export const loginUser =
       return user;
     }
   };
+
+export const logoutUser = () => async (dispatch) => {
+  const res = await csrfFetch("/api/session", {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(unsetSessionUser());
+    return;
+  }
+};
 
 const sessionReducer = (state = initialState, action) => {
   let newState;
