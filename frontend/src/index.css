@@ -1,1 +1,14 @@
 /* TODO Add site wide styles */
+body {
+    background-color: #FAC08A;
+    box-sizing: border-box;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 100%;
+}
+
+#root {
+    width: 100%;
+}

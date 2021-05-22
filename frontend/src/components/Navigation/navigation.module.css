@@ -1,3 +1,45 @@
-.hidden {
-    display: none;
+.navbar {
+    height: 2.5rem;
+    background-color: #5b8612;
+    width: 100%;
+    overflow: visible;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navbar__container {
+
+}
+
+.navbar__search {
+    margin: 0.25rem;
+    padding: 0;
+    width: fit-content;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    border: none;
+}
+
+.search__button {
+    border: none;
+    background-color: white;
+    height: 1.9rem;
+}
+
+.search__button:active {
+    background-color: whitesmoke;
+}
+
+input {
+    height: 2rem;
+    width: 220px;
+}
+
+.logo {
+    width: fit-content;
+    height: 45px;
+    overflow: hidden;
+    align-items: center;
 }
