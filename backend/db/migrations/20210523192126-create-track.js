@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      uploader_id: {
+      uploaderId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "Users" },
@@ -25,7 +25,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(255),
       },
-      albumart_link: {
+      albumArtLink: {
         allowNull: false,
         type: Sequelize.STRING
       },

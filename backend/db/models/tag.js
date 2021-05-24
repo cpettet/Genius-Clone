@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Tag.belongsToMany(models.Track, {
       through: "Tag_Links",
-      otherKey: "track_id",
-      foreignKey: "tag_id",
+      otherKey: "trackId",
+      foreignKey: "tagId",
     });
   };
   return Tag;

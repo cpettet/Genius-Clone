@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Tag_Link = sequelize.define(
     "Tag_Link",
     {
-      track_id: { type: DataTypes.INTEGER, allowNull: false },
-      tag_id: { type: DataTypes.INTEGER, allowNull: false },
+      trackId: { type: DataTypes.INTEGER, allowNull: false },
+      tagId: { type: DataTypes.INTEGER, allowNull: false },
     },
     {}
   );

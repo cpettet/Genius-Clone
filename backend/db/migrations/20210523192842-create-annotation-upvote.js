@@ -8,12 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      annotation_id: {
+      annotationannotationId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "Annotations" }
       },
-      author_id: {
+      authorId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "Users" }

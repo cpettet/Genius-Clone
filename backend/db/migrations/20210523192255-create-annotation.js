@@ -8,11 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      author_id: {
+      authorId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      track_id: {
+      trackId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },

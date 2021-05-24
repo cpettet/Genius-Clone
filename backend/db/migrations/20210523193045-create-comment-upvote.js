@@ -8,12 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      comment_id: {
+      commentId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "Comments" }
       },
-      author_id: {
+      authorId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "Users" }

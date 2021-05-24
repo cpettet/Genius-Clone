@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Annotation_Upvote = sequelize.define(
     "Annotation_Upvote",
     {
-      annotation_id: { type: DataTypes.INTEGER, allowNull: false },
-      author_id: { type: DataTypes.INTEGER, allowNull: false },
+      annotationannotationId: { type: DataTypes.INTEGER, allowNull: false },
+      authorId: { type: DataTypes.INTEGER, allowNull: false },
       vote: DataTypes.ENUM("neutral", "upvote", "downvote"),
     },
     {}

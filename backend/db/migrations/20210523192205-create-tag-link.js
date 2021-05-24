@@ -8,12 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      track_id: {
+      trackId: {
         allowNull: false,
         references: { model: "Tracks" },
         type: Sequelize.INTEGER,
       },
-      tag_id: {
+      tagId: {
         allowNull: false,
         references: { model: "Tags" },
         type: Sequelize.INTEGER
