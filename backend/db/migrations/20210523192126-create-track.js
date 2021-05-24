@@ -25,6 +25,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(255),
       },
+      lyrics: {
+        allowNull: false,
+        type: Sequelize.TEXT
+      },
       albumArtLink: {
         allowNull: false,
         type: Sequelize.STRING

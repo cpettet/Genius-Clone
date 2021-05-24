@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       albumArtLink: { type: DataTypes.STRING, allowNull: false },
+      lyrics: {
+        allowNull: false,
+        type: DataTypes.TEXT,
+      }
     },
     {}
   );

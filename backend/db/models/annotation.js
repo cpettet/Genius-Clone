@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Annotation.belongsTo(models.Track, { foreignKey: "trackId" });
     Annotation.belongsTo(models.User, { foreignKey: "authorId" });
-    Annotation.hasMany(models.Annotation_Upvote, { foreignKey: "annotationannotationId" })
+    Annotation.hasMany(models.Annotation_Upvote, { foreignKey: "annotationId" })
   };
   return Annotation;
 };
