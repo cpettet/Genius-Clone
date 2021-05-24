@@ -9,9 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       track_id: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        references: { model: "Tracks" },
+        type: Sequelize.INTEGER,
       },
       tag_id: {
+        allowNull: false,
+        references: { model: "Tags" },
         type: Sequelize.INTEGER
       },
       createdAt: {

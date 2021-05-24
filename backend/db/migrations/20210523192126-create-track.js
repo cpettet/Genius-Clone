@@ -9,18 +9,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       uploader_id: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: "Users" },
       },
       artist: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(255),
       },
       album: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(255),
       },
       title: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(255),
       },
       albumart_link: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {
