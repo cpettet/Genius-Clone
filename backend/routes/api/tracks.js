@@ -4,7 +4,7 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const { requireAuth } = require("../../utils/auth");
-const { Track } = require("../../db/models");
+const { Track, Comment, Annotation } = require("../../db/models");
 const track = require("../../db/models/track");
 
 const router = express.Router();
@@ -26,6 +26,15 @@ const validateTrack = [
     .exists({ checkFalsy: true })
     .withMessage("Please provide album art link."),
 ];
+
+// Get tracks: GET /api/tracks
+// Complete
+router.get("/", asyncHandler(async (req, res) => {
+  const tracks = await Track.findAll({
+    limit: 10
+  });
+  return res.json(tracks);
+}))
 
 // Create track: POST /api/tracks
 // Incomplete: functioning
@@ -57,7 +66,9 @@ router.get(
   "/:id",
   asyncHandler(async (req, res) => {
     const trackId = req.params.id;
-    const track = await Track.findByPk(trackId);
+    const track = await Track.findByPk(trackId, {
+      include: [Comment, Annotation]
+    });
     return res.json(track);
   })
 );
