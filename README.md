@@ -12,3 +12,7 @@ User discussion will be moderated through up and downvote buttons to help reach 
 ## Bonus
 * Users can search for an artist, album, track, or through tags.
 * Users can tag different tracks from any previously used tags, or create their own.
+
+# Work to-do (after presentation)
+## Annotations
+* Use a starting and ending index in the data model.
