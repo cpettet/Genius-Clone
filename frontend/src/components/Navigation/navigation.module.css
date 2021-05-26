@@ -1,5 +1,5 @@
 .navbar {
-    height: 4.5rem;
+    height: fit-content;
     background-color: #5b8612;
     width: 100%;
     overflow: visible;
@@ -17,14 +17,31 @@
 }
 
 .navbar__lower {
+    display: flex;
+    flex-direction: row;
     background-color: black;
-    height: 3.5rem;
-    overflow: hidden;
+    height: fit-content;
+    overflow: visible;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.navbar__lower__container {
+    height: 2.0rem;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
     text-decoration: none;
+    text-transform: uppercase;
+    margin-top: 0.75rem;
+    text-align:center;
 }
 
 .navbar__search {
