@@ -1,1 +1,40 @@
-.track {}
+.track__container {
+    display: flex;
+    justify-content: center;
+    background-color: #97C34B;
+}
+
+.track {
+  display: flex;
+  justify-content: center;
+  width: 67%;
+  height: 20rem;
+}
+
+.track__overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.information__container {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.information__album-art {
+    height: 220px;
+    width: 220px;
+    padding: 1px;
+    background-color: grey;
+    border: 2px solid #5A8611;
+}
+
+h1 {
+    color: #5A8611;
+}

@@ -3,7 +3,7 @@ import styles from "./tracks-chart-item.module.css";
 
 const TracksChartItem = ({ track, id }) => {
   return (
-    <Link to={`/tracks/${id}`} style={{ textDecoration: "none" }}>
+    <Link to={`/tracks/${track.id}`} style={{ textDecoration: "none" }}>
       <div className={styles.chart__item}>
         <div className={styles.number}>{id + 1}</div>
         <div className={styles.art__container}>
