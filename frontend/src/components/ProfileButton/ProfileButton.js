@@ -31,7 +31,7 @@ const ProfileButton = ({user}) => {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button className={styles["profile-button"]} onClick={openMenu}>
         <div className={styles.profile__container}>
           <i className="fas fa-user" />
         </div>

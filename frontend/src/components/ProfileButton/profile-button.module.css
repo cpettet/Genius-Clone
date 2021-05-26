@@ -1,4 +1,8 @@
 .profile__container {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: green;
+}
+
+.profile-button{
+    height: 2.5rem;
 }

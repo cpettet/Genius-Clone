@@ -1,16 +1,30 @@
 .navbar {
-    height: 2.5rem;
+    height: 4.5rem;
     background-color: #5b8612;
     width: 100%;
     overflow: visible;
     position: relative;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 }
 
-.navbar__container {
+.navbar__upper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.navbar__lower {
+    background-color: black;
+    height: 3.5rem;
+    overflow: hidden;
+}
+
+.nav__link {
+    color: white;
+    text-decoration: none;
 }
 
 .navbar__search {
@@ -33,7 +47,7 @@
 }
 
 input {
-    height: 2rem;
+    height: 1.9rem;
     width: 220px;
 }
 
