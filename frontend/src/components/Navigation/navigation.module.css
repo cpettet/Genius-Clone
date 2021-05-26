@@ -27,15 +27,27 @@
 }
 
 .navbar__lower__container {
-    height: 2.0rem;
+    box-sizing: border-box;
+    height: 1.75rem;
     width: fit-content;
     align-items: center;
     justify-content: center;
+    margin-left: 2rem;
+    margin-left: 2rem;
+    color: white;
+}
+
+.navbar__lower__centering__container {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .nav__link {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     color: white;
     text-decoration: none;

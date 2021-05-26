@@ -60,26 +60,34 @@ const Navigation = ({ isLoaded }) => {
         {isLoaded && sessionLinks}
       </div>
       <div className={style.navbar__lower}>
-        {sessionUser && (
-          <Link to="/tracks/new" className={style.nav__link}>
-            <div className={style.navbar__lower__container}>add a song</div>
+        <div className={style.navbar__lower__centering__container}>
+          <Link to="/" className={style.nav__link}>
+            <div className={style.navbar__lower__container}>charts</div>
           </Link>
-        )}
-        <a href="https://www.github.com/cpettet" className={style.nav__link}>
-          <div className={style.navbar__lower__container}>Github</div>
-        </a>
-        <a
-          href="https://www.linkedin.com/in/christianpettet/"
-          className={style.nav__link}
-        >
-          <div className={style.navbar__lower__container}>LinkedIn</div>
-        </a>
-        <a
-          href="mailto:cpettet11@gmail.com"
-          className={style.nav__link}
-        >
-          <div className={style.navbar__lower__container}>Email Us</div>
-        </a>
+          {sessionUser && (
+            <Link to="/tracks/new" className={style.nav__link}>
+              <div className={style.navbar__lower__container}>add a song</div>
+            </Link>
+          )}
+          <a href="https://www.github.com/cpettet" className={style.nav__link}>
+            <div className={style.navbar__lower__container}>
+              <i class="fab fa-github"></i>
+            </div>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/christianpettet/"
+            className={style.nav__link}
+          >
+            <div className={style.navbar__lower__container}>
+              <i class="fab fa-linkedin"></i>{" "}
+            </div>
+          </a>
+          <a href="mailto:cpettet11@gmail.com" className={style.nav__link}>
+            <div className={style.navbar__lower__container}>
+              <i class="fas fa-envelope-square"></i>
+            </div>
+          </a>
+        </div>
       </div>
     </nav>
   );
