@@ -71,7 +71,7 @@ const Navigation = ({ isLoaded }) => {
           )}
           <a href="https://www.github.com/cpettet" className={style.nav__link}>
             <div className={style.navbar__lower__container}>
-              <i class="fab fa-github"></i>
+              <i className="fab fa-github"></i>
             </div>
           </a>
           <a
@@ -79,12 +79,12 @@ const Navigation = ({ isLoaded }) => {
             className={style.nav__link}
           >
             <div className={style.navbar__lower__container}>
-              <i class="fab fa-linkedin"></i>{" "}
+              <i className="fab fa-linkedin"></i>{" "}
             </div>
           </a>
           <a href="mailto:cpettet11@gmail.com" className={style.nav__link}>
             <div className={style.navbar__lower__container}>
-              <i class="fas fa-envelope-square"></i>
+              <i className="fas fa-envelope-square"></i>
             </div>
           </a>
         </div>
