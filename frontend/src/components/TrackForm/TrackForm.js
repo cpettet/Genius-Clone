@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { csrfFetch } from "../../store/csrf";
 import styles from "./track-form.module.css";
-import { useHistory } from "react-router-dom";
 
 const TrackForm = () => {
-  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [album, setAlbum] = useState("");
@@ -25,7 +23,6 @@ const TrackForm = () => {
         body: JSON.stringify({ artist, title, album, lyrics, albumArtLink })
       });
       const track = await res.json();
-      console.log(track);
       if (track && track.errors) setErrors(track.errors);
     } catch (e) {
       setErrors(e.errors);

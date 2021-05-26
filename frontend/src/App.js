@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import Navigation from "./components/Navigation";
 import { checkUserLogin } from "../src/store/session";
 import TrackForm from "./components/TrackForm";
+import TracksChart from "./components/TracksChart";
+import TrackShow from "./components/TrackShow";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,8 +19,14 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded}/>
       <Switch>
+        <Route exact path="/">
+          <TracksChart />
+        </Route>
         <Route path="/tracks/new">
           <TrackForm />
+        </Route>
+        <Route path="/tracks/:id">
+          <TrackShow />
         </Route>
       </Switch>
     </>

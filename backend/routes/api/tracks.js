@@ -33,7 +33,7 @@ router.get("/", asyncHandler(async (req, res) => {
   const tracks = await Track.findAll({
     limit: 10
   });
-  return res.json(tracks);
+  return await res.json(tracks);
 }))
 
 // Create track: POST /api/tracks

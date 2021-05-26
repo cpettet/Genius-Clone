@@ -1,0 +1,58 @@
+.chart__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+    font-size: 1.5rem;
+    padding: 0px;
+    align-content: flex-start;
+    border-bottom: 1px solid grey;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: black;
+}
+
+.chart__item:hover {
+    background-color: #C2E880;
+}
+
+.number {
+    width: 5%;
+}
+
+.art__container {
+    width: fit-content;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.art {
+    height: 70px;
+    width: 70px;
+}
+
+.title__container {
+    flex-direction: row;
+    width: 50%;
+    flex-grow: 3;
+    margin: 1rem;
+}
+
+.title__lyrics {
+    font-size: 0.75rem;
+    color:grey;
+}
+
+.track__artist {
+    min-width: 6rem;
+    flex-grow: 2;
+    flex-basis: 20%;
+    flex-direction: row;
+}
+
+.title__text {
+    font-weight: 550;
+}
