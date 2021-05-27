@@ -1,7 +1,7 @@
 {
   "name": "folk-genius",
   "version": "1.0.0",
-  "description": "",
+  "description": "A clone of genius focused on folk music.",
   "main": "index.js",
   "scripts": {
     "heroku-postbuild": "npm run build --prefix frontend",
@@ -17,13 +17,10 @@
     "url": "git+https://github.com/cpettet/Genius-Clone.git"
   },
   "keywords": [],
-  "author": {},
+  "author": { "name": "Christian" },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cpettet/Genius-Clone/issues"
   },
-  "homepage": "https://github.com/cpettet/Genius-Clone",
-  "dependencies": {
-    "sequelize-cli": "^6.2.0"
-  }
+  "homepage": "https://github.com/cpettet/Genius-Clone"
 }
