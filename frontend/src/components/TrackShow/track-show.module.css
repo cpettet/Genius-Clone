@@ -71,6 +71,7 @@
 
 .lyrics__container__right {
     margin-top: 1.5rem;
+    min-width: 40%;
 }
 
 .edit-lyrics-buttons {

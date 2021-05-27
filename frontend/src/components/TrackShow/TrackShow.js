@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { csrfFetch } from "../../store/csrf";
 import styles from "./track-show.module.css";
 
 const TrackShow = () => {
+  const history = useHistory();
   const trackId = useParams().id;
   const [track, setTrack] = useState({});
   const [editMode, setEditMode] = useState(false);
@@ -28,13 +29,31 @@ const TrackShow = () => {
     getTrack();
   }, [trackId]);
 
-  function handleSubmit(e) {
+  async function editTrack(e) {
     e.preventDefault();
-    const res = csrfFetch(`/api/tracks/${trackId}`, {
-      method: "POST",
+    const res = await csrfFetch(`/api/tracks/${trackId}`, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        trackId: trackId,
+        artist: track.artist,
+        title: track.title,
+        album: track.album,
+        lyrics: lyrics,
+        albumArtLink: track.albumArtLink,
+      }),
     });
-    return;
+    const data = await res.json();
+    setTrack(data.track);
+    setEditMode(false);
+  }
+
+  async function deleteTrack(e) {
+    e.preventDefault();
+    const res = await csrfFetch(`/api/tracks/${trackId}`, {
+      method: "DELETE",
+    });
+    history.push("/");
   }
 
   function createMarkup() {
@@ -83,8 +102,11 @@ const TrackShow = () => {
           >
             {editMode ? "Cancel" : "Edit Lyrics"}
           </button>
-          <button onClick={(e) => handleSubmit(e)} className={styles["edit-lyrics-buttons"]} hidden={editMode === false}>
+          <button onClick={(e) => editTrack(e)} className={styles["edit-lyrics-buttons"]} hidden={editMode === false}>
             {editMode && "Submit Edit"}
+          </button>
+          <button onClick={(e) => deleteTrack(e)} className={styles["edit-lyrics-buttons"]} hidden={editMode === false}>
+            {editMode && "Delete Track"}
           </button>
           <div className={styles["input-container"]} hidden={!editMode}>
             <div className={styles["input-container__warning"]}>Please be mindful of your edits.</div>

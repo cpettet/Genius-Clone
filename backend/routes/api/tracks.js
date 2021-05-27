@@ -29,12 +29,15 @@ const validateTrack = [
 
 // Get tracks: GET /api/tracks
 // Complete
-router.get("/", asyncHandler(async (req, res) => {
-  const tracks = await Track.findAll({
-    limit: 10
-  });
-  return await res.json(tracks);
-}))
+router.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    const tracks = await Track.findAll({
+      limit: 10,
+    });
+    return await res.json(tracks);
+  })
+);
 
 // Create track: POST /api/tracks
 // Incomplete: functioning
@@ -67,7 +70,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const trackId = req.params.id;
     const track = await Track.findByPk(trackId, {
-      include: [Comment, Annotation]
+      include: [Comment, Annotation],
     });
     return res.json(track);
   })
@@ -80,23 +83,21 @@ router.put(
   validateTrack,
   requireAuth,
   asyncHandler(async (req, res) => {
-    const trackId = req.params.id;
-    const { artist, title, album, lyrics, albumArtLink } = req.body;
+    const { trackId, artist, title, album, lyrics, albumArtLink } = req.body;
     const userId = req.user.dataValues.id;
 
     try {
       const track = await Track.findByPk(trackId);
 
-      if (userId === track.uploaderId) {
-        await track.update({
-          artist,
-          title,
-          album,
-          lyrics,
-          albumArtLink,
-        });
-        return res.json({ update: true, track_id: track.id });
-      }
+      await track.update({
+        uploaderId: userId,
+        artist,
+        title,
+        album,
+        lyrics,
+        albumArtLink,
+      });
+      return res.json({ update: true, track_id: track.id, track: track });
     } catch (e) {
       const err = new Error("This isn't your track");
       err.title = "Unauthorized";
