@@ -15,20 +15,19 @@ const TrackForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    
+
     try {
       const res = await csrfFetch("/api/tracks", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ artist, title, album, lyrics, albumArtLink })
+        body: JSON.stringify({ artist, title, album, lyrics, albumArtLink }),
       });
       const track = await res.json();
       if (track && track.errors) setErrors(track.errors);
     } catch (e) {
       setErrors(e.errors);
     }
-    history.push("/")
-
+    history.push("/");
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -85,7 +84,9 @@ const TrackForm = () => {
             className={styles.lyrics}
             value={lyrics}
             onChange={(e) => setLyrics(e.target.value)}
-            placeholder={"But for now we are young \nLet us lay in the sun \nAnd count every beautiful thing we can see"}
+            placeholder={
+              "But for now we are young \nLet us lay in the sun \nAnd count every beautiful thing we can see"
+            }
           />
         </div>
       </div>

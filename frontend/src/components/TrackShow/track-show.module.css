@@ -1,1 +1,109 @@
-.track {}
+.track__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #FAC08A;
+}
+
+.track__info {
+    display: flex;
+    justify-content: center;
+    background-color: #97C34B;
+}
+
+.track {
+  display: flex;
+  justify-content: center;
+  width: 67%;
+  height: 20rem;
+}
+
+.track__overlay {
+    background: linear-gradient(0deg, #00000088 50%, #ffffff44 100%);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.information__container {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.information__album-art {
+    height: 220px;
+    width: 220px;
+    padding: 1px;
+    background-color: grey;
+    border: 2px solid #5A8611;
+}
+
+.track__title {
+    color: #5A8611;
+}
+
+.track__artist {
+    color: white;
+}
+
+.track__minor {
+    color: #FAC08A;
+}
+
+.track__minor__subtext {
+    color: white;
+}
+
+.lyrics__container {
+    width: 67%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    background-color: #D28F51;
+    align-self: center;
+}
+
+.lyrics__container__right {
+    margin-top: 1.5rem;
+    min-width: 40%;
+}
+
+.edit-lyrics-buttons {
+    background-color: #D28F51;
+    border: 2px solid black;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+    border-radius: 0;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.25rem;
+}
+
+button + button {
+    margin-left: 0.5rem;
+}
+
+.edit-lyrics-buttons:hover {
+    background-color: #914F13;
+}
+
+.input-container__warning {
+    border: 2px solid fuchsia;
+    background-color: #574190;
+    color: white;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+}
+
+.edit-lyrics-text {
+    height: 800px;
+    width: 500px;
+    overflow: scroll;
+    border: 2px solid fuchsia;
+    font-size: 1.0rem;
+}
