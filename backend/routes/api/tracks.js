@@ -5,7 +5,6 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const { requireAuth } = require("../../utils/auth");
 const { Track, Comment, Annotation } = require("../../db/models");
-const track = require("../../db/models/track");
 
 const router = express.Router();
 

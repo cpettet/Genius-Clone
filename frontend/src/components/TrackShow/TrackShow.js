@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { csrfFetch } from "../../store/csrf";
 import styles from "./track-show.module.css";
+import CommentsShow from "../CommentsShow";
 
 const TrackShow = () => {
   const history = useHistory();
@@ -50,7 +51,7 @@ const TrackShow = () => {
 
   async function deleteTrack(e) {
     e.preventDefault();
-    const res = await csrfFetch(`/api/tracks/${trackId}`, {
+    await csrfFetch(`/api/tracks/${trackId}`, {
       method: "DELETE",
     });
     history.push("/");
@@ -127,6 +128,7 @@ const TrackShow = () => {
         </div>
         <div className={styles.lyrics__container__right}>
           <div>About "{track.title}"...</div>
+          <CommentsShow trackId={trackId} />
         </div>
       </div>
     </div>
