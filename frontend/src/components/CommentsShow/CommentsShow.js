@@ -6,10 +6,10 @@ import { fetchAddComment, getTrackComments } from "../../store/comment";
 const CommentsShow = ({ trackId }) => {
   const dispatch = useDispatch();
   const authorId = useSelector((state) => state.session.user.user.id);
-  // const comments = useSelector(state => state.trackId)
+  const comments = useSelector(state => state.comments.comments)
   const [processComment, setProcessComment] = useState(false);
   const [commentContent, setCommentContent] = useState("");
-  // console.log(comments);
+  console.log(comments);
 
   const handleSubmit = (e) => {
     e.preventDefault();
