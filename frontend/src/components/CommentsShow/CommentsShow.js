@@ -6,9 +6,10 @@ import { fetchAddComment, getTrackComments } from "../../store/comment";
 const CommentsShow = ({ trackId }) => {
   const dispatch = useDispatch();
   const authorId = useSelector((state) => state.session.user.id);
-  const comments = useSelector(state => state.comments.comments)
+  const comments = useSelector((state) => state.comments);
   const [processComment, setProcessComment] = useState(false);
   const [commentContent, setCommentContent] = useState("");
+  console.log(Object.keys(comments))
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +39,6 @@ const CommentsShow = ({ trackId }) => {
         </form>
       </div>
       <div className={styles.comments}>
-
       </div>
     </div>
   );
