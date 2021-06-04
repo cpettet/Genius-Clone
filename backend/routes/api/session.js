@@ -19,7 +19,7 @@ const validateLogin = [
   handleValidationErrors,
 ];
 
-// Login
+// Login: POST /api/comments
 router.post(
   "/",
   validateLogin,
@@ -38,7 +38,7 @@ router.post(
 
     await setTokenCookie(res, user);
 
-    return res.json({ user });
+    return res.json(user);
   })
 );
 

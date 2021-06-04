@@ -9,7 +9,7 @@ const router = express.Router();
 
 
 // Get comments: GET /api/comments/
-// WIP
+// Complete
 router.get("/track:id", asyncHandler(async (req, res) => {
     const trackId = req.params.id;
     const comments = await Comment.findAll({
@@ -34,7 +34,7 @@ router.post("/", requireAuth, asyncHandler(async (req, res) => {
         content
     });
     await newComment.save();
-    return res.json({ newComment });
+    return res.json(newComment);
 }));
 
 // Edit comment: PUT /api/comments/:id

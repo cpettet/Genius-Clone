@@ -87,7 +87,7 @@ const TrackShow = () => {
                 <p className={styles.track__minor}>
                   COMMENTARY BY{" "}
                   <span className={styles.track__minor__subtext}>
-                    {sessionUser.user.username}
+                    {sessionUser.username}
                   </span>
                 </p>
               </div>

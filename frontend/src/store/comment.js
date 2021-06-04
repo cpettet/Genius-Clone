@@ -50,13 +50,13 @@ const commentReducer = (state = initialState, action) => {
     case ADD_COMMENT:
       newState = { ...state };
       const newComment = action.payload;
-      newState.comments[newComment.id] = newComment;
+      newState[newComment.id] = newComment;
       return newState;
     case LOAD_COMMENTS:
       newState = { ...state };
-      newState.comments = {};
+      newState = {};
       action.payload.forEach(comment => {
-        newState.comments[comment.id] = comment;
+        newState[comment.id] = comment;
       })
       return newState;
     default:
