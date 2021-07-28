@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import styles from "./track-show.module.css";
 import CommentsShow from "../CommentsShow";
 import { getTrack, updateTrack, deleteTrack } from "../../store/track";
+import { getTrackComments } from "../../store/comment";
 
 const TrackShow = () => {
   const dispatch = useDispatch();
@@ -20,8 +21,9 @@ const TrackShow = () => {
 
   useEffect(() => {
     dispatch(getTrack(trackId));
+    dispatch(getTrackComments(trackId));
     setLyrics(track?.lyrics);
-  }, [trackId, dispatch, track]);
+  }, [dispatch, trackId, track.lyrics]);
 
   async function onEdit(e) {
     e.preventDefault();
@@ -40,7 +42,7 @@ const TrackShow = () => {
 
   async function onDelete(e) {
     e.preventDefault();
-    dispatch(deleteTrack(trackId))
+    dispatch(deleteTrack(trackId));
     history.push("/");
   }
 
@@ -122,8 +124,8 @@ const TrackShow = () => {
             dangerouslySetInnerHTML={createMarkup()}
             hidden={editMode}
           ></div>
+          <CommentsShow trackId={trackId} />
         </div>
-        <CommentsShow trackId={trackId} />
         <div className={styles.lyrics__container__right}>
           <div>About "{track?.title}"...</div>
         </div>
