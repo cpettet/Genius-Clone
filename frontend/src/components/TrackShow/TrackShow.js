@@ -11,7 +11,7 @@ const TrackShow = () => {
   const [track, setTrack] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [lyrics, setLyrics] = useState("");
-  const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state.session?.user);
 
   const toggleEdits = () => {
     setEditMode((prevValue) => !prevValue);
@@ -87,7 +87,7 @@ const TrackShow = () => {
                 <p className={styles.track__minor}>
                   COMMENTARY BY{" "}
                   <span className={styles.track__minor__subtext}>
-                    {sessionUser.username}
+                    {sessionUser?.username}
                   </span>
                 </p>
               </div>
@@ -125,10 +125,10 @@ const TrackShow = () => {
             dangerouslySetInnerHTML={createMarkup()}
             hidden={editMode}
           ></div>
+          <CommentsShow trackId={trackId} />
         </div>
         <div className={styles.lyrics__container__right}>
           <div>About "{track.title}"...</div>
-          <CommentsShow trackId={trackId} />
         </div>
       </div>
     </div>

@@ -5,11 +5,10 @@ import { fetchAddComment, getTrackComments } from "../../store/comment";
 
 const CommentsShow = ({ trackId }) => {
   const dispatch = useDispatch();
-  const authorId = useSelector((state) => state.session.user.id);
+  const authorId = useSelector((state) => state.session?.user?.id);
   const comments = useSelector((state) => state.comments);
   const [processComment, setProcessComment] = useState(false);
   const [commentContent, setCommentContent] = useState("");
-  console.log(Object.keys(comments))
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +22,7 @@ const CommentsShow = ({ trackId }) => {
 
   useEffect(() => {}, [processComment]);
 
-  return (
+  return authorId ? (
     <div className={styles["comments-container"]}>
       <div className={styles["new-comment"]}>
         <form onSubmit={handleSubmit}>
@@ -38,8 +37,11 @@ const CommentsShow = ({ trackId }) => {
           </button>
         </form>
       </div>
-      <div className={styles.comments}>
-      </div>
+      <div className={styles.comments}></div>
+    </div>
+  ) : (
+    <div className={styles["comments-container"]}>
+      Sign in to start commenting
     </div>
   );
 };

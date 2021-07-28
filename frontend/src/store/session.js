@@ -83,12 +83,8 @@ const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET:
       newState = { ...state };
-      newState.user = action.user
+      newState.user = action.user;
       return newState;
-      // return {
-      //   ...state,
-      //   user: action.user,
-      // };
     case UNSET:
       newState = Object.assign({}, state);
       newState = null;

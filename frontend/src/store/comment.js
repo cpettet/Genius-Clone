@@ -1,7 +1,7 @@
 import { csrfFetch } from "../store/csrf";
 
-const ADD_COMMENT = "event/ADD_COMMENT";
-const LOAD_COMMENTS = "event/LOAD_COMMENTS";
+const ADD_COMMENT = "comment/ADD_COMMENT";
+const LOAD_COMMENTS = "comment/LOAD_COMMENTS";
 
 // action creators
 export const addComment = (comment) => ({
