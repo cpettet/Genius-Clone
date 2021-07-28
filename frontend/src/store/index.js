@@ -3,10 +3,12 @@ import thunk from "redux-thunk";
 
 import sessionReducer from "./session";
 import comments from "./comment";
+import tracks from "./track";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  comments
+  comments,
+  tracks,
 });
 
 let enhancer;

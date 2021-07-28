@@ -119,7 +119,7 @@ router.delete(
     try {
       const track = await Track.findByPk(trackId);
       if (userId === track.uploaderId) await track.destroy();
-      return res.json({ delete: true });
+      return res.json({ delete: true, trackId });
     } catch (e) {
       const err = new Error("This isn't your track");
       err.title = "Unauthorized";
