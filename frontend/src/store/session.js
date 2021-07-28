@@ -23,7 +23,7 @@ export const checkUserLogin = () => async (dispatch) => {
   });
   if (res.ok) {
     const user = await res.json();
-    dispatch(setSessionUser(user));
+    dispatch(setSessionUser(user?.user));
     return user;
   }
 };

@@ -15,7 +15,7 @@ export const loadComments = (trackComments) => ({
 });
 
 // thunk action creators
-export const fetchAddComment = (comment) => async (dispatch) => {
+export const createComment = (comment) => async (dispatch) => {
   const res = await csrfFetch("/api/comments", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

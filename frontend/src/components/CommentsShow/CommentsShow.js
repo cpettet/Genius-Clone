@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./comments-show.module.css";
-import { fetchAddComment, getTrackComments } from "../../store/comment";
+import { createComment, getTrackComments } from "../../store/comment";
 
 const CommentsShow = ({ trackId }) => {
   const dispatch = useDispatch();
@@ -9,18 +9,17 @@ const CommentsShow = ({ trackId }) => {
   const comments = useSelector((state) => state.comments);
   const [processComment, setProcessComment] = useState(false);
   const [commentContent, setCommentContent] = useState("");
+  console.log("Here's the comments:", Object.values(comments))
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchAddComment({ authorId, trackId, content: commentContent }));
+    dispatch(createComment({ authorId, trackId, content: commentContent }));
     setCommentContent("");
   };
 
   useEffect(() => {
     dispatch(getTrackComments(trackId));
   }, [dispatch, trackId]);
-
-  useEffect(() => {}, [processComment]);
 
   return authorId ? (
     <div className={styles["comments-container"]}>
