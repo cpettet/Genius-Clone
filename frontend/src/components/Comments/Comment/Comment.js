@@ -17,7 +17,6 @@ const Comment = ({comment}) => {
         </div>
       </div>
       <div className={styles.comment__body}>
-        This is where my content would go, if I had content.
         {comment.content}
       </div>
       <div className={styles.comment__buttons}>
