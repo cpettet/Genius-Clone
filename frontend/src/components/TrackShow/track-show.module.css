@@ -103,7 +103,7 @@ button + button {
 .edit-lyrics-text {
     height: 800px;
     width: 500px;
-    overflow: scroll;
+    overflow-y: scroll;
     border: 2px solid fuchsia;
     font-size: 1.0rem;
 }

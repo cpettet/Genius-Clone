@@ -1,0 +1,36 @@
+.hidden {
+    display: none;
+}
+
+.create-comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border: 1px solid black;
+    padding: 1rem;
+    width: -moz-fit-content;
+    width: 100%;
+    flex-wrap: nowrap;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.create-comment__input {
+    height: 4rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    border: 2px solid fuchsia;
+    font-size: 1.0rem;
+}
+
+.submit {
+    background-color: #D28F51;
+    border: 2px solid black;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+    border-radius: 0;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.25rem;
+}

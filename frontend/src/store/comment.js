@@ -41,24 +41,29 @@ export const getTrackComments = (trackId) => async (dispatch) => {
 };
 
 const initialState = {
-  comments: null
+  byId: {},
+  allIds: [],
 };
 
 const commentReducer = (state = initialState, action) => {
-  let newState;
   switch (action.type) {
-    case ADD_COMMENT:
-      newState = { ...state };
+    case ADD_COMMENT: {
+      const newState = { ...state };
       const newComment = action.payload;
-      newState[newComment.id] = newComment;
+      newState.byId[newComment.id] = newComment;
+      if (!newState.allIds.includes(newComment.id))
+        newState.allIds.push(newComment.id);
       return newState;
-    case LOAD_COMMENTS:
-      newState = { ...state };
-      newState = {};
-      action.payload.forEach(comment => {
-        newState[comment.id] = comment;
-      })
+    }
+    case LOAD_COMMENTS: {
+      const newState = { ...state };
+      action.payload.forEach((comment) => {
+        newState.byId[comment.id] = comment;
+        if (!newState.allIds.includes(comment.id))
+          newState.allIds.push(comment.id);
+      });
       return newState;
+    }
     default:
       return state;
   }

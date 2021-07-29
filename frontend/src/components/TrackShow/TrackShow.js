@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import styles from "./track-show.module.css";
-import CommentsShow from "../CommentsShow";
+import CommentsShow from "../Comments/CommentsShow";
 import { getTrack, updateTrack, deleteTrack } from "../../store/track";
 import { getTrackComments } from "../../store/comment";
 
@@ -23,7 +23,7 @@ const TrackShow = () => {
     dispatch(getTrack(trackId));
     dispatch(getTrackComments(trackId));
     setLyrics(track?.lyrics);
-  }, [dispatch, trackId, track.lyrics]);
+  }, [dispatch, trackId, track?.lyrics]);
 
   async function onEdit(e) {
     e.preventDefault();
