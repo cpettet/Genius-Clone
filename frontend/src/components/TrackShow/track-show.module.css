@@ -67,6 +67,7 @@
     align-items: flex-start;
     background-color: #D28F51;
     align-self: center;
+    margin-bottom: 2rem;
 }
 
 .lyrics__container__right {

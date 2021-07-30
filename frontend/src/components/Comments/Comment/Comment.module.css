@@ -1,0 +1,23 @@
+.comment {
+    border-top: 2px solid #99a7ee;
+    margin: 1rem;
+}
+
+.comment__header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0rem;
+}
+
+.comment__header__profile-card {
+    font-weight: 700;
+}
+
+.comment__header__date {
+    color: #9a9a9a;
+    font-size: 0.75rem;
+}

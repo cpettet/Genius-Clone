@@ -1,6 +1,6 @@
 import { csrfFetch } from "./csrf";
 
-export const SET = "/session/SET";
+const SET = "/session/SET";
 const UNSET = "/session/UNSET";
 
 const initialState = {
@@ -23,7 +23,7 @@ export const checkUserLogin = () => async (dispatch) => {
   });
   if (res.ok) {
     const user = await res.json();
-    dispatch(setSessionUser(user?.user));
+    dispatch(setSessionUser(user.user));
     return user;
   }
 };

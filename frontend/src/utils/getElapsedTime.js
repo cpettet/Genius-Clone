@@ -19,4 +19,5 @@ export default function getElapsedTime(first, second = new Date()) {
     return `${minutes} ${minutes > 1 ? "minutes" : "minute"} ago`;
   if (seconds >= 1)
     return `${seconds} ${seconds > 1 ? "seconds" : "second"} ago`;
+  return "NEW"
 }
