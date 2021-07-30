@@ -1,6 +1,11 @@
 .comment {
     border-top: 2px solid #99a7ee;
     margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
 }
 
 .comment__header {

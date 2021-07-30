@@ -1,7 +1,8 @@
+import { useEffect } from "react";
+import CommentButtons from "../CommentButtons";
 import styles from "./Comment.module.css";
 import getElapsedTime from "../../../utils/getElapsedTime";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { getUser } from "../../../store/user";
 
 const Comment = ({ comment }) => {
@@ -26,7 +27,7 @@ const Comment = ({ comment }) => {
       </div>
       <div className={styles.comment__body}>{comment.content}</div>
       <div className={styles.comment__buttons}>
-        Upvote and downvote buttons OR Edit and Delete buttons
+        <CommentButtons />
       </div>
     </div>
   );
