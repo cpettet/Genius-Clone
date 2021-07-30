@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CommentButtons from "../CommentButtons";
 import styles from "./Comment.module.css";
 import getElapsedTime from "../../../utils/getElapsedTime";
@@ -7,11 +7,14 @@ import { getUser } from "../../../store/user";
 
 const Comment = ({ comment }) => {
   const dispatch = useDispatch();
-  const commentDate = new Date(comment?.createdAt);
-  const currentDate = new Date();
+  const [editSession, setEditSession] = useState(false);
+  const commentDateTime = new Date(comment?.createdAt);
+  const currentDateTime = new Date();
   const commentAuthor = useSelector(
     (state) => state.users.byId[comment.authorId]?.username
   );
+
+  console.log("Current edit session:", editSession)
 
   useEffect(() => dispatch(getUser(comment.authorId)), [dispatch, comment]);
 
@@ -22,12 +25,12 @@ const Comment = ({ comment }) => {
           {commentAuthor}
         </div>
         <div className={styles.comment__header__date}>
-          {getElapsedTime(commentDate, currentDate)}
+          {getElapsedTime(commentDateTime, currentDateTime)}
         </div>
       </div>
       <div className={styles.comment__body}>{comment.content}</div>
       <div className={styles.comment__buttons}>
-        <CommentButtons />
+        <CommentButtons authorId={comment.authorId} setEditSession={setEditSession} />
       </div>
     </div>
   );
