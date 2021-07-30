@@ -1,8 +1,9 @@
 import styles from "./Comment.module.css";
+import getElapsedTime from "../../../utils/getElapsedTime";
 
-const Comment = ({comment}) => {
-  let commentDate = new Date(comment?.createdAt);
-  console.log("Date for comment:", commentDate)
+const Comment = ({ comment }) => {
+  const commentDate = new Date(comment?.createdAt);
+  const currentDate = new Date();
 
   return (
     <div className={styles.comment}>
@@ -12,13 +13,10 @@ const Comment = ({comment}) => {
           {comment.authorId}
         </div>
         <div className={styles.comment__header__date}>
-          Posted x years, months, days, etc. ago
-          {comment.createdAt}
+          {getElapsedTime(commentDate, currentDate)}
         </div>
       </div>
-      <div className={styles.comment__body}>
-        {comment.content}
-      </div>
+      <div className={styles.comment__body}>{comment.content}</div>
       <div className={styles.comment__buttons}>
         Upvote and downvote buttons OR Edit and Delete buttons
       </div>

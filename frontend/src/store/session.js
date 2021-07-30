@@ -1,6 +1,6 @@
 import { csrfFetch } from "./csrf";
 
-const SET = "/session/SET";
+export const SET = "/session/SET";
 const UNSET = "/session/UNSET";
 
 const initialState = {
@@ -9,7 +9,7 @@ const initialState = {
 
 const setSessionUser = (user) => ({
   type: SET,
-  user,
+  payload: user,
 });
 
 const unsetSessionUser = () => ({
@@ -83,7 +83,7 @@ const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET:
       newState = { ...state };
-      newState.user = action.user;
+      newState.user = action.payload;
       return newState;
     case UNSET:
       newState = Object.assign({}, state);
