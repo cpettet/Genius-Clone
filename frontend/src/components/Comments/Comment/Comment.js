@@ -4,6 +4,7 @@ import styles from "./Comment.module.css";
 import getElapsedTime from "../../../utils/getElapsedTime";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../../store/user";
+import { updateComment } from "../../../store/comment";
 
 const Comment = ({ comment }) => {
   const dispatch = useDispatch();
@@ -17,8 +18,10 @@ const Comment = ({ comment }) => {
 
   const onEditSubmit = (e) => {
     e.preventDefault();
-    console.log("Here's the edit:", commentContent)
-  }
+    dispatch(updateComment({ content: commentContent, commentId: comment.id }));
+    setCommentContent("");
+    setEditSession(false);
+  };
 
   useEffect(() => dispatch(getUser(comment.authorId)), [dispatch, comment]);
 
@@ -49,6 +52,7 @@ const Comment = ({ comment }) => {
       <div className={styles.comment__buttons}>
         <CommentButtons
           authorId={comment.authorId}
+          commentId={comment.id}
           setEditSession={setEditSession}
         />
       </div>

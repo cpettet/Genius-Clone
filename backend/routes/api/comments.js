@@ -48,11 +48,12 @@ router.patch(
   asyncHandler(async (req, res) => {
     const commentId = req.params.id;
     const { content } = req.body;
+    console.log("Comment ID:", commentId);
+    console.log("Request body::", req.body);
     try {
       const commentToEdit = await Comment.findByPk(commentId);
-      await commentToEdit.update({
-        content,
-      });
+      commentToEdit.content = content;
+      await commentToEdit.save();
       return res.json({ update: true, comment: commentToEdit, commentId });
     } catch (e) {
       const err = new Error("Unexpected error updating comment");
@@ -69,12 +70,15 @@ router.delete(
   "/:id",
   requireAuth,
   asyncHandler(async (req, res) => {
+    console.log("Comment id:", req.params.id)
     const commentId = req.params.id;
     const userId = req.user.dataValues.id;
 
     try {
       const comment = await Comment.findByPk(commentId);
-      if (userId === comment.authorId) await track.destroy();
+      console.log("Comment is:", comment)
+
+      if (userId === comment.authorId) comment.destroy();
       return res.json({ delete: true, commentId });
     } catch (e) {
       const err = new Error("Unexpected error deleting comment");

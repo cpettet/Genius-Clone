@@ -58,7 +58,7 @@ export const updateTrack = (data) => async (dispatch) => {
   });
   const updatedTrack = await res.json();
   if (res.ok) {
-    dispatch(editTrack(updatedTrack));
+    dispatch(editTrack(updatedTrack.track));
     return updatedTrack;
   } else {
     return res.errors;
