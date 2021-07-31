@@ -7,6 +7,7 @@ import { getUser } from "../../../store/user";
 
 const Comment = ({ comment }) => {
   const dispatch = useDispatch();
+  const [commentContent, setCommentContent] = useState(comment.content);
   const [editSession, setEditSession] = useState(false);
   const commentDateTime = new Date(comment?.createdAt);
   const currentDateTime = new Date();
@@ -14,7 +15,10 @@ const Comment = ({ comment }) => {
     (state) => state.users.byId[comment.authorId]?.username
   );
 
-  console.log("Current edit session:", editSession)
+  const onEditSubmit = (e) => {
+    e.preventDefault();
+    console.log("Here's the edit:", commentContent)
+  }
 
   useEffect(() => dispatch(getUser(comment.authorId)), [dispatch, comment]);
 
@@ -28,9 +32,25 @@ const Comment = ({ comment }) => {
           {getElapsedTime(commentDateTime, currentDateTime)}
         </div>
       </div>
-      <div className={styles.comment__body}>{comment.content}</div>
+      <div className={styles.comment__body}>
+        {editSession ? (
+          <>
+            <textarea
+              value={commentContent}
+              onChange={(e) => setCommentContent(e.target.value)}
+              className={styles["comment__body__input"]}
+            />
+            <button onClick={onEditSubmit}>Submit Changes</button>
+          </>
+        ) : (
+          comment.content
+        )}
+      </div>
       <div className={styles.comment__buttons}>
-        <CommentButtons authorId={comment.authorId} setEditSession={setEditSession} />
+        <CommentButtons
+          authorId={comment.authorId}
+          setEditSession={setEditSession}
+        />
       </div>
     </div>
   );

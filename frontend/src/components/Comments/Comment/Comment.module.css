@@ -18,6 +18,20 @@
     padding: 0.75rem 0rem;
 }
 
+.comment__body {
+    display: flex;
+}
+
+.comment__body__input {
+  height: 4rem;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  border: 2px solid fuchsia;
+  font-size: 1rem;
+  resize: vertical;
+}
+
 .comment__header__profile-card {
     font-weight: 700;
 }
