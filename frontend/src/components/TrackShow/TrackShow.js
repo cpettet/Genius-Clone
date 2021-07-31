@@ -1,92 +1,83 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { csrfFetch } from "../../store/csrf";
 import styles from "./track-show.module.css";
+import CommentsShow from "../Comments/CommentsShow";
+import Error404 from "../Error404";
+import { getTrack, updateTrack, deleteTrack } from "../../store/track";
+import { getTrackComments } from "../../store/comment";
 
 const TrackShow = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const trackId = useParams().id;
-  const [track, setTrack] = useState({});
+  const track = useSelector((state) => state.tracks?.byId[trackId]);
   const [editMode, setEditMode] = useState(false);
   const [lyrics, setLyrics] = useState("");
-  const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state.session?.user);
 
   const toggleEdits = () => {
     setEditMode((prevValue) => !prevValue);
   };
 
   useEffect(() => {
-    const getTrack = async () => {
-      const res = await csrfFetch(`/api/tracks/${trackId}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await res.json();
-      setTrack(data);
-      setLyrics(data.lyrics);
-    };
-    getTrack();
-  }, [trackId]);
+      dispatch(getTrack(trackId));
+      dispatch(getTrackComments(trackId));
+      setLyrics(track?.lyrics);
+  }, [dispatch, trackId, track?.lyrics]);
 
-  async function editTrack(e) {
+  async function onEdit(e) {
     e.preventDefault();
-    const res = await csrfFetch(`/api/tracks/${trackId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    await dispatch(
+      updateTrack({
         trackId: trackId,
         artist: track.artist,
         title: track.title,
         album: track.album,
         lyrics: lyrics,
         albumArtLink: track.albumArtLink,
-      }),
-    });
-    const data = await res.json();
-    setTrack(data.track);
+      })
+    );
     setEditMode(false);
   }
 
-  async function deleteTrack(e) {
+  async function onDelete(e) {
     e.preventDefault();
-    const res = await csrfFetch(`/api/tracks/${trackId}`, {
-      method: "DELETE",
-    });
+    dispatch(deleteTrack(trackId));
     history.push("/");
   }
 
   function createMarkup() {
-    return { __html: track.lyrics };
+    return { __html: track?.lyrics };
   }
 
-  return (
-    <div className={styles.track__container}>
+  return (track ?
+    (<div className={styles.track__container}>
       <div className={styles.track__info}>
         <div className={styles.track}>
           <div
             className={styles.information__container}
-            style={{ backgroundImage: `url(${track.albumArtLink})` }}
+            style={{ backgroundImage: `url(${track?.albumArtLink})` }}
           >
             <div className={styles.track__overlay}>
               <img
-                src={track.albumArtLink}
+                src={track?.albumArtLink}
                 className={styles["information__album-art"]}
-                alt={`Album art for ${track.album}`}
+                alt={`Album art for ${track?.album}`}
               />
               <div className={styles.track__overlay__text}>
-                <h1 className={styles.track__title}>{track.title}</h1>
-                <h2 className={styles.track__artist}>{track.artist}</h2>
+                <h1 className={styles.track__title}>{track?.title}</h1>
+                <h2 className={styles.track__artist}>{track?.artist}</h2>
                 <p className={styles.track__minor}>
                   Album{" "}
                   <span className={styles.track__minor__subtext}>
-                    {track.album}
+                    {track?.album}
                   </span>
                 </p>
                 <p className={styles.track__minor}>
                   COMMENTARY BY{" "}
                   <span className={styles.track__minor__subtext}>
-                    {sessionUser.user.username}
+                    {sessionUser?.username}
                   </span>
                 </p>
               </div>
@@ -102,14 +93,24 @@ const TrackShow = () => {
           >
             {editMode ? "Cancel" : "Edit Lyrics"}
           </button>
-          <button onClick={(e) => editTrack(e)} className={styles["edit-lyrics-buttons"]} hidden={editMode === false}>
+          <button
+            onClick={(e) => onEdit(e)}
+            className={styles["edit-lyrics-buttons"]}
+            hidden={editMode === false}
+          >
             {editMode && "Submit Edit"}
           </button>
-          <button onClick={(e) => deleteTrack(e)} className={styles["edit-lyrics-buttons"]} hidden={editMode === false}>
+          <button
+            onClick={(e) => onDelete(e)}
+            className={styles["edit-lyrics-buttons"]}
+            hidden={editMode === false}
+          >
             {editMode && "Delete Track"}
           </button>
           <div className={styles["input-container"]} hidden={!editMode}>
-            <div className={styles["input-container__warning"]}>Please be mindful of your edits.</div>
+            <div className={styles["input-container__warning"]}>
+              Please be mindful of your edits.
+            </div>
             <textarea
               className={styles["edit-lyrics-text"]}
               value={lyrics}
@@ -124,12 +125,14 @@ const TrackShow = () => {
             dangerouslySetInnerHTML={createMarkup()}
             hidden={editMode}
           ></div>
+          <CommentsShow trackId={trackId} />
         </div>
         <div className={styles.lyrics__container__right}>
-          <div>About "{track.title}"...</div>
+          <div>About "{track?.title}"...</div>
         </div>
       </div>
-    </div>
+    </div>)
+    : <Error404 />
   );
 };
 

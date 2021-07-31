@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { csrfFetch } from "../../store/csrf";
+import { useDispatch } from "react-redux";
+import { addNewTrack } from "../../store/track";
 import styles from "./track-form.module.css";
 
 const TrackForm = () => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [album, setAlbum] = useState("");
@@ -17,12 +19,9 @@ const TrackForm = () => {
     setErrors([]);
 
     try {
-      const res = await csrfFetch("/api/tracks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ artist, title, album, lyrics, albumArtLink }),
-      });
-      const track = await res.json();
+      const track = dispatch(
+        addNewTrack({ artist, title, album, lyrics, albumArtLink })
+      );
       if (track && track.errors) setErrors(track.errors);
     } catch (e) {
       setErrors(e.errors);

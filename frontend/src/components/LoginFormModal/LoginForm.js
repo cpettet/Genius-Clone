@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
+import DemoUserButton from "../DemoUserButton";
+import SignupFormModal from "../SignupFormModal";
 import "./login-form-page.css";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,13 +57,11 @@ const LoginForm = () => {
       </div>
       <div className="input-container form__buttons">
         <button className="submit">Login</button>
-        <button className="demo">Demo User</button>
+        <DemoUserButton setErrors={setErrors} />
       </div>
       <p className="signup">
         Don't have an account?{" "}
-        <span className="hyperlink">
-          <a href="/signup">Sign up here.</a>
-        </span>
+        <SignupFormModal />
       </p>
     </form>
   );

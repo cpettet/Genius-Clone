@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
+import DemoUserButton from "../DemoUserButton";
+import LoginFormModal from "../LoginFormModal";
 import "./signup-form.module.css";
 
 export default function SignupForm() {
@@ -79,13 +81,11 @@ export default function SignupForm() {
       </div>
       <div className="input-container form__buttons">
         <button className="submit">Create Account</button>
-        <button className="demo">Demo User</button>
+        <DemoUserButton setErrors={setErrors} />
       </div>
       <p className="login">
         Already an account?{" "}
-        <span className="hyperlink">
-          <a href="/login">Sign in here.</a>
-        </span>
+        <LoginFormModal />
       </p>
     </form>
   );

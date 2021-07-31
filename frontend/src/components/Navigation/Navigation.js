@@ -9,7 +9,7 @@ import logo from "./logo.svg";
 
 const Navigation = ({ isLoaded }) => {
   const [searchTerms, setSearchTerms] = useState("");
-  const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state.session?.user);
 
   let sessionLinks;
   if (sessionUser) {

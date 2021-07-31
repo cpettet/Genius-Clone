@@ -19,7 +19,7 @@ const validateLogin = [
   handleValidationErrors,
 ];
 
-// Login
+// Login: POST /api/comments
 router.post(
   "/",
   validateLogin,
@@ -38,7 +38,7 @@ router.post(
 
     await setTokenCookie(res, user);
 
-    return res.json({ user });
+    return res.json(user.toSafeObject());
   })
 );
 
@@ -52,9 +52,7 @@ router.delete("/", (_req, res) => {
 router.get("/", restoreUser, (req, res) => {
     const { user } = req;
     if (user) {
-        return res.json({
-            user: user.toSafeObject()
-        });
+        return res.json(user.toSafeObject());
     } else {
         return res.json(null);
     }

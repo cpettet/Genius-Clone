@@ -67,6 +67,7 @@
     align-items: flex-start;
     background-color: #D28F51;
     align-self: center;
+    margin-bottom: 2rem;
 }
 
 .lyrics__container__right {
@@ -103,7 +104,7 @@ button + button {
 .edit-lyrics-text {
     height: 800px;
     width: 500px;
-    overflow: scroll;
+    overflow-y: scroll;
     border: 2px solid fuchsia;
     font-size: 1.0rem;
 }
