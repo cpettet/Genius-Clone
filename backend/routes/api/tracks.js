@@ -67,11 +67,21 @@ router.post(
 router.get(
   "/:id",
   asyncHandler(async (req, res) => {
-    const trackId = req.params.id;
-    const track = await Track.findByPk(trackId, {
-      include: [Comment, Annotation],
-    });
-    return res.json(track);
+    const trackId = req.params.id;    
+    try {
+      const track = await Track.findByPk(trackId, {
+        include: [Comment, Annotation],
+      });
+      if (track === null) throw "Track was not found"
+      return res.json(track);
+    } catch (e) {
+      const err = new Error("Track was not found");
+      err.title = "404 Not found";
+      err.errors = ["We couldn't find your track"];
+      err.status = 404;
+      return res.json({ error: err });
+    }
+
   })
 );
 

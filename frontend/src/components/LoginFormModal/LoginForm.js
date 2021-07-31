@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import DemoUserButton from "../DemoUserButton";
+import SignupFormModal from "../SignupFormModal";
 import "./login-form-page.css";
 
 const LoginForm = () => {
@@ -60,9 +61,7 @@ const LoginForm = () => {
       </div>
       <p className="signup">
         Don't have an account?{" "}
-        <span className="hyperlink">
-          <a href="/signup">Sign up here.</a>
-        </span>
+        <SignupFormModal />
       </p>
     </form>
   );

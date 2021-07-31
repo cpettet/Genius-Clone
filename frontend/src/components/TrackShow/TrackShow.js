@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import styles from "./track-show.module.css";
 import CommentsShow from "../Comments/CommentsShow";
+import Error404 from "../Error404";
 import { getTrack, updateTrack, deleteTrack } from "../../store/track";
 import { getTrackComments } from "../../store/comment";
 
@@ -20,9 +21,9 @@ const TrackShow = () => {
   };
 
   useEffect(() => {
-    dispatch(getTrack(trackId));
-    dispatch(getTrackComments(trackId));
-    setLyrics(track?.lyrics);
+      dispatch(getTrack(trackId));
+      dispatch(getTrackComments(trackId));
+      setLyrics(track?.lyrics);
   }, [dispatch, trackId, track?.lyrics]);
 
   async function onEdit(e) {
@@ -50,8 +51,8 @@ const TrackShow = () => {
     return { __html: track?.lyrics };
   }
 
-  return (
-    <div className={styles.track__container}>
+  return (track ?
+    (<div className={styles.track__container}>
       <div className={styles.track__info}>
         <div className={styles.track}>
           <div
@@ -130,7 +131,8 @@ const TrackShow = () => {
           <div>About "{track?.title}"...</div>
         </div>
       </div>
-    </div>
+    </div>)
+    : <Error404 />
   );
 };
 
