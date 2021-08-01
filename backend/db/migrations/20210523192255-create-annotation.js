@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable("Annotations", {
@@ -11,10 +11,12 @@ module.exports = {
       authorId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: { model: "Users" },
       },
       trackId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: { model: "Tracks" },
       },
       content: {
         allowNull: false,
@@ -32,6 +34,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Annotations');
-  }
+    return queryInterface.dropTable("Annotations");
+  },
 };

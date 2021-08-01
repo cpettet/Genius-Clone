@@ -41,6 +41,14 @@ const TrackShow = () => {
     setEditMode(false);
   }
 
+  const startAnAnnotation = e => {
+    e.preventDefault();
+    const highlighted = window.getSelection();
+    console.log("Here's the highlighted:", highlighted)
+    console.log("Here's the start index:", highlighted.anchorOffset)
+    console.log("Here's the ending index:", highlighted.focusOffset)
+  }
+
   async function onDelete(e) {
     e.preventDefault();
     dispatch(deleteTrack(trackId));
@@ -120,11 +128,13 @@ const TrackShow = () => {
               }
             />
           </div>
-          <div
+          {/* <div
             className={styles.lyrics}
             dangerouslySetInnerHTML={createMarkup()}
             hidden={editMode}
-          ></div>
+            onMouseUp={startAnAnnotation}
+          ></div> */}
+          <p>{track.lyrics}</p>
           <CommentsShow trackId={trackId} />
         </div>
         <div className={styles.lyrics__container__right}>
