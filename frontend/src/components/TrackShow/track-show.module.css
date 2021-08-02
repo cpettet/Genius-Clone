@@ -47,6 +47,10 @@
     color: #5A8611;
 }
 
+.track__lyrics {
+    white-space: pre-wrap;
+}
+
 .track__artist {
     color: white;
 }

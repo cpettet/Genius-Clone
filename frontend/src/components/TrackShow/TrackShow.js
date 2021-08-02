@@ -55,12 +55,8 @@ const TrackShow = () => {
     history.push("/");
   }
 
-  function createMarkup() {
-    return { __html: track?.lyrics };
-  }
-
-  return (track ?
-    (<div className={styles.track__container}>
+  return track ? (
+    <div className={styles.track__container}>
       <div className={styles.track__info}>
         <div className={styles.track}>
           <div
@@ -111,7 +107,7 @@ const TrackShow = () => {
           <button
             onClick={(e) => onDelete(e)}
             className={styles["edit-lyrics-buttons"]}
-            hidden={editMode === false}
+            hidden={editMode === false || sessionUser?.id !== track.uploaderId}
           >
             {editMode && "Delete Track"}
           </button>
@@ -128,21 +124,22 @@ const TrackShow = () => {
               }
             />
           </div>
-          {/* <div
-            className={styles.lyrics}
-            dangerouslySetInnerHTML={createMarkup()}
+          <p
             hidden={editMode}
             onMouseUp={startAnAnnotation}
-          ></div> */}
-          <p>{track.lyrics}</p>
+            className={styles.track__lyrics}
+          >
+            {track.lyrics}
+          </p>
           <CommentsShow trackId={trackId} />
         </div>
         <div className={styles.lyrics__container__right}>
           <div>About "{track?.title}"...</div>
         </div>
       </div>
-    </div>)
-    : <Error404 />
+    </div>
+  ) : (
+    <Error404 />
   );
 };
 
