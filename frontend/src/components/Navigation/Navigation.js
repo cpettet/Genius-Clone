@@ -14,16 +14,14 @@ const Navigation = ({ isLoaded }) => {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <>
-        <ProfileButton user={sessionUser} />
-      </>
+      <ProfileButton user={sessionUser} />
     );
   } else {
     sessionLinks = (
-      <div>
+      <>
         <LoginFormModal />
         <SignupFormModal />
-      </div>
+      </>
     );
   }
 

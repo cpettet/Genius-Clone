@@ -1,9 +1,22 @@
 .profile__container {
-    font-size: 1.5rem;
-    color: green;
+  font-size: 1.5rem;
+  color: green;
 }
 
-.profile-button{
-    height: 2.5rem;
-    border-radius: 100%;
+.profile-button {
+  height: 2.5rem;
+  border-radius: 100%;
+}
+
+.profile-button__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.profile-dropdown {
+    list-style: none;
 }
