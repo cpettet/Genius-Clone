@@ -7,6 +7,7 @@ import TrackInfo from "../TrackInfo";
 import Error404 from "../Error404";
 import { getTrack } from "../../store/track";
 import TrackEdit from "../TrackEdit";
+import AnnotationForm from "../AnnotationForm";
 import { getTrackComments } from "../../store/comment";
 
 const TrackShow = () => {
@@ -16,7 +17,6 @@ const TrackShow = () => {
   const [editMode, setEditMode] = useState(false);
   const [annotateMode, setAnnotateMode] = useState(false);
   const [annotateBox, setAnnotateBox] = useState(false);
-  const [newAnnotation, setNewAnnotation] = useState("");
   const [yCoordinate, setYCoordinate] = useState(0);
   const sessionUser = useSelector((state) => state.session?.user);
 
@@ -68,38 +68,12 @@ const TrackShow = () => {
         <div className={styles.lyrics__container__right}>
           <div>About "{track?.title}"...</div>
           {annotateMode && (
-            <div
-              className={styles.annotation}
-              style={{ top: yCoordinate - 465 }}
-            >
-              <button
-                hidden={annotateBox}
-                onClick={() => setAnnotateBox(true)}
-                className={styles["annotation__start-annotation"]}
-              >
-                Start the Folk Genius Annotation
-              </button>
-              <form
-                className={
-                  !annotateBox
-                    ? styles["annotation__form-hidden"]
-                    : styles.annotation__form
-                }
-              >
-                <textarea
-                  className={styles.annotation__content}
-                  placeholder="Don't just put the lyric in your own words - drop some knowledge!"
-                />
-                <div className={styles.annotation__buttons}>
-                  <button className={styles.annotation__buttons__save}>
-                    Save
-                  </button>
-                  <button className={styles.annotation__buttons__cancel}>
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </div>
+            <AnnotationForm
+              annotateBox={annotateBox}
+              setAnnotateBox={setAnnotateBox}
+              yCoordinate={yCoordinate}
+              setAnnotateMode={setAnnotateMode}
+            />
           )}
         </div>
       </div>
