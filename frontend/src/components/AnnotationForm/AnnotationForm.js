@@ -1,10 +1,40 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./AnnotationForm.module.css";
+import { createAnnotation } from "../../store/annotation";
 
-const AnnotationForm = ({ annotateBox, setAnnotateBox, yCoordinate, setAnnotateMode }) => {
+const AnnotationForm = ({
+  annotateBox,
+  setAnnotateBox,
+  yCoordinate,
+  setAnnotateMode,
+  startIndex,
+  endIndex,
+  trackId,
+  sessionUser,
+}) => {
   const dispatch = useDispatch();
   const [newAnnotation, setNewAnnotation] = useState("");
+  const authorId = sessionUser?.id;
+
+  const cancelAnnotation = (e) => {
+    e.preventDefault();
+    setNewAnnotation("");
+    setAnnotateMode(false);
+  };
+
+  const submitAnnotation = (e) => {
+    e.preventDefault();
+    dispatch(createAnnotation({
+      authorId,
+      trackId,
+      content: newAnnotation,
+      startIndex,
+      endIndex,
+    }))
+    setNewAnnotation("");
+    setAnnotateMode(false);
+  };
 
   return (
     <div className={styles.annotation} style={{ top: yCoordinate - 465 }}>
@@ -16,6 +46,7 @@ const AnnotationForm = ({ annotateBox, setAnnotateBox, yCoordinate, setAnnotateM
         Start the Folk Genius Annotation
       </button>
       <form
+        onSubmit={submitAnnotation}
         className={
           !annotateBox
             ? styles["annotation__form-hidden"]
@@ -32,11 +63,7 @@ const AnnotationForm = ({ annotateBox, setAnnotateBox, yCoordinate, setAnnotateM
           <button className={styles.annotation__buttons__save}>Save</button>
           <button
             className={styles.annotation__buttons__cancel}
-            onClick={(e) => {
-              e.preventDefault();
-              setNewAnnotation("");
-              setAnnotateMode(false);
-            }}
+            onClick={cancelAnnotation}
           >
             Cancel
           </button>

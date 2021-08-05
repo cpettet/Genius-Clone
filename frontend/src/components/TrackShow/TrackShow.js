@@ -17,6 +17,8 @@ const TrackShow = () => {
   const [editMode, setEditMode] = useState(false);
   const [annotateMode, setAnnotateMode] = useState(false);
   const [annotateBox, setAnnotateBox] = useState(false);
+  const [startIndex, setStartIndex] = useState();
+  const [endIndex, setEndIndex] = useState();
   const [yCoordinate, setYCoordinate] = useState(0);
   const sessionUser = useSelector((state) => state.session?.user);
 
@@ -29,15 +31,11 @@ const TrackShow = () => {
     e.preventDefault();
     const highlighted = window.getSelection();
     const indices = [highlighted.anchorOffset, highlighted.focusOffset];
-    const startIndex = Math.min(...indices);
-    const endIndex = Math.max(...indices);
+    setStartIndex(Math.min(...indices));
+    setEndIndex(Math.max(...indices))
     await setYCoordinate(e.pageY);
     if (startIndex !== endIndex) {
       setAnnotateMode(true);
-      console.log("Here's the highlighted:", highlighted);
-      console.log("Here's the start index:", startIndex);
-      console.log("Here's the ending index:", endIndex);
-      console.log("Here's the y-coordinate:", yCoordinate);
     }
   };
 
@@ -58,6 +56,8 @@ const TrackShow = () => {
             onMouseDown={() => {
               setAnnotateMode(false);
               setAnnotateBox(false);
+              // setStartIndex("");
+              // setEndIndex("");
             }}
             className={styles.track__lyrics}
           >
@@ -73,6 +73,10 @@ const TrackShow = () => {
               setAnnotateBox={setAnnotateBox}
               yCoordinate={yCoordinate}
               setAnnotateMode={setAnnotateMode}
+              startIndex={startIndex}
+              endIndex={endIndex}
+              trackId={trackId}
+              sessionUser={sessionUser}
             />
           )}
         </div>
