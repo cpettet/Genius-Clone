@@ -1,26 +1,120 @@
 .track__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #FAC08A;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f7f7f7;
 }
 
 .track__lyrics {
-    white-space: pre-wrap;
+  white-space: pre-wrap;
 }
 
 .lyrics__container {
-    width: 67%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-start;
-    background-color: #D28F51;
-    align-self: center;
-    margin-bottom: 2rem;
+  width: 67%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  background-color: #ffffff;
+  align-self: center;
+  margin-bottom: 2rem;
 }
 
 .lyrics__container__right {
-    margin-top: 1.5rem;
-    min-width: 40%;
+  margin-top: 1.5rem;
+  min-width: 40%;
+}
+
+.annotation__start-annotation {
+  padding: 0.35rem;
+  font-weight: 550;
+  border: 0.125rem solid #000;
+  box-sizing: border-box;
+}
+.edit-lyrics-buttons {
+  background-color: #d28f51;
+  border: 2px solid black;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  border-radius: 0;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.25rem;
+}
+
+button + button {
+  margin-left: 0.5rem;
+}
+
+.edit-lyrics-buttons:hover {
+  background-color: #914f13;
+}
+
+.input-container__warning {
+  border: 2px solid fuchsia;
+  background-color: #574190;
+  color: white;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+}
+
+.annotation {
+  border-left: 0.35rem solid #b2d7fe;
+  position: relative;
+  padding: 0rem 0rem 0rem 1rem;
+  background-color: #ffffff;
+}
+
+.annotation__form-hidden {
+  display: none;
+}
+
+.annotation__form {
+  width: 100%;
+  border: none;
+}
+
+.annotation__content {
+  width: 100%;
+  min-height: 8rem;
+  border: none;
+  background-color: #f7f7f7;
+  margin-bottom: 0.75rem;
+  resize: vertical;
+  overflow-y: scroll;
+}
+
+.annotation__buttons {
+  border-top: 1px solid #b2d7fe;
+  width: 100%;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.annotation__buttons__save {
+  background-color: #ffffff;
+  border: 2px solid #0ecb27;
+  color: #0ecb27;
+  border-radius: 0;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+}
+
+.annotation__buttons__save:hover {
+  background-color: rgba(14, 203, 39, 0.2);
+}
+
+.annotation__buttons__cancel {
+  background-color: #ffffff;
+  border: none;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+}
+
+.annotation__buttons__cancel:hover {
+  background-color: #f7f7f7;
 }

@@ -14,6 +14,10 @@ const TrackShow = () => {
   const trackId = useParams().id;
   const track = useSelector((state) => state.tracks?.byId[trackId]);
   const [editMode, setEditMode] = useState(false);
+  const [annotateMode, setAnnotateMode] = useState(false);
+  const [annotateBox, setAnnotateBox] = useState(false);
+  const [newAnnotation, setNewAnnotation] = useState("");
+  const [yCoordinate, setYCoordinate] = useState(0);
   const sessionUser = useSelector((state) => state.session?.user);
 
   useEffect(() => {
@@ -21,12 +25,20 @@ const TrackShow = () => {
     dispatch(getTrackComments(trackId));
   }, [dispatch, trackId]);
 
-  const startAnAnnotation = (e) => {
+  const startAnAnnotation = async (e) => {
     e.preventDefault();
     const highlighted = window.getSelection();
-    console.log("Here's the highlighted:", highlighted);
-    console.log("Here's the start index:", highlighted.anchorOffset);
-    console.log("Here's the ending index:", highlighted.focusOffset);
+    const indices = [highlighted.anchorOffset, highlighted.focusOffset];
+    const startIndex = Math.min(...indices);
+    const endIndex = Math.max(...indices);
+    await setYCoordinate(e.pageY);
+    if (startIndex !== endIndex) {
+      setAnnotateMode(true);
+      console.log("Here's the highlighted:", highlighted);
+      console.log("Here's the start index:", startIndex);
+      console.log("Here's the ending index:", endIndex);
+      console.log("Here's the y-coordinate:", yCoordinate);
+    }
   };
 
   return track ? (
@@ -43,6 +55,10 @@ const TrackShow = () => {
           <p
             hidden={editMode}
             onMouseUp={startAnAnnotation}
+            onMouseDown={() => {
+              setAnnotateMode(false);
+              setAnnotateBox(false);
+            }}
             className={styles.track__lyrics}
           >
             {track.lyrics}
@@ -51,6 +67,40 @@ const TrackShow = () => {
         </div>
         <div className={styles.lyrics__container__right}>
           <div>About "{track?.title}"...</div>
+          {annotateMode && (
+            <div
+              className={styles.annotation}
+              style={{ top: yCoordinate - 465 }}
+            >
+              <button
+                hidden={annotateBox}
+                onClick={() => setAnnotateBox(true)}
+                className={styles["annotation__start-annotation"]}
+              >
+                Start the Folk Genius Annotation
+              </button>
+              <form
+                className={
+                  !annotateBox
+                    ? styles["annotation__form-hidden"]
+                    : styles.annotation__form
+                }
+              >
+                <textarea
+                  className={styles.annotation__content}
+                  placeholder="Don't just put the lyric in your own words - drop some knowledge!"
+                />
+                <div className={styles.annotation__buttons}>
+                  <button className={styles.annotation__buttons__save}>
+                    Save
+                  </button>
+                  <button className={styles.annotation__buttons__cancel}>
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
         </div>
       </div>
     </div>
