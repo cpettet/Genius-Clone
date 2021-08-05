@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styles from "./AnnotationForm.module.css";
 import { createAnnotation } from "../../store/annotation";
 

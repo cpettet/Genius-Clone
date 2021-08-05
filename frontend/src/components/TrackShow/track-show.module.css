@@ -5,10 +5,6 @@
   background-color: #f7f7f7;
 }
 
-.track__lyrics {
-  white-space: pre-wrap;
-}
-
 .lyrics__container {
   width: 67%;
   display: flex;

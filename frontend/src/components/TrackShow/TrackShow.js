@@ -7,8 +7,10 @@ import TrackInfo from "../TrackInfo";
 import Error404 from "../Error404";
 import { getTrack } from "../../store/track";
 import TrackEdit from "../TrackEdit";
+import LyricsShow from "../LyricsShow";
 import AnnotationForm from "../AnnotationForm";
 import { getTrackComments } from "../../store/comment";
+import { getTrackAnnotations } from "../../store/annotation";
 
 const TrackShow = () => {
   const dispatch = useDispatch();
@@ -25,6 +27,7 @@ const TrackShow = () => {
   useEffect(() => {
     dispatch(getTrack(trackId));
     dispatch(getTrackComments(trackId));
+    dispatch(getTrackAnnotations(trackId));
   }, [dispatch, trackId]);
 
   const startAnAnnotation = async (e) => {
@@ -32,7 +35,7 @@ const TrackShow = () => {
     const highlighted = window.getSelection();
     const indices = [highlighted.anchorOffset, highlighted.focusOffset];
     setStartIndex(Math.min(...indices));
-    setEndIndex(Math.max(...indices))
+    setEndIndex(Math.max(...indices));
     await setYCoordinate(e.pageY);
     if (startIndex !== endIndex) {
       setAnnotateMode(true);
@@ -40,7 +43,7 @@ const TrackShow = () => {
   };
 
   return track ? (
-    <div className={styles.track__container}>
+    <div className={styles.track__container} onMouseUp={startAnAnnotation}>
       <TrackInfo track={track} sessionUser={sessionUser} />
       <div className={styles.lyrics__container}>
         <div className={styles.lyrics__container__left}>
@@ -50,19 +53,13 @@ const TrackShow = () => {
             setEditMode={setEditMode}
             sessionUser={sessionUser}
           />
-          <p
-            hidden={editMode}
-            onMouseUp={startAnAnnotation}
-            onMouseDown={() => {
-              setAnnotateMode(false);
-              setAnnotateBox(false);
-              // setStartIndex("");
-              // setEndIndex("");
-            }}
-            className={styles.track__lyrics}
-          >
-            {track.lyrics}
-          </p>
+          <LyricsShow
+            editMode={editMode}
+            startAnAnnotation={startAnAnnotation}
+            setAnnotateBox={setAnnotateBox}
+            setAnnotateMode={setAnnotateMode}
+            track={track}
+          />
           <CommentsShow trackId={trackId} />
         </div>
         <div className={styles.lyrics__container__right}>
