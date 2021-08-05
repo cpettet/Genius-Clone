@@ -6,7 +6,7 @@ const { Comment } = require("../../db/models");
 
 const router = express.Router();
 
-// Get comments: GET /api/comments/
+// Get comments: GET /api/comments/track:id
 // Complete
 router.get(
   "/track:id",
@@ -41,7 +41,7 @@ router.post(
   })
 );
 
-// Edit comment: PUT /api/comments/:id
+// Edit comment: PATCH /api/comments/:id
 router.patch(
   "/:id",
   requireAuth,
@@ -74,6 +74,7 @@ router.delete(
     try {
       const comment = await Comment.findByPk(commentId);
       if (userId === comment.authorId) comment.destroy();
+      else throw Error("You are not the comment's author.");
       return res.json({ delete: true, commentId });
     } catch (e) {
       const err = new Error("Unexpected error deleting comment");

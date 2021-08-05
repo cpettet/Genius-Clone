@@ -23,6 +23,14 @@ module.exports = {
         type: Sequelize.TEXT,
         unique: true,
       },
+      startIndex: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      endIndex: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
