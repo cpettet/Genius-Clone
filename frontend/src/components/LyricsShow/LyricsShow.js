@@ -2,17 +2,13 @@ import { useState } from "react";
 import styles from "./LyricsShow.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
-const LyricsShow = ({
-  editMode,
-  startAnAnnotation,
-  setAnnotateBox,
-  setAnnotateMode,
-  track,
-}) => {
+const LyricsShow = ({ editMode, setAnnotateBox, setAnnotateMode, track }) => {
   const dispatch = useDispatch();
-  const lyrics = track.lyrics;
-  const annotations = track.annotations;
-  // const startIndices = track.annotations
+  const startIndices = Object.values(track?.Annotations).sort(
+    (a, b) => a.startIndex - b.startIndex
+  );
+
+  console.log("Start indices", startIndices);
 
   return (
     <p

@@ -16,6 +16,7 @@ const TrackShow = () => {
   const dispatch = useDispatch();
   const trackId = useParams().id;
   const track = useSelector((state) => state.tracks?.byId[trackId]);
+  const [indices, setIndices] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [annotateMode, setAnnotateMode] = useState(false);
   const [annotateBox, setAnnotateBox] = useState(false);
@@ -30,12 +31,18 @@ const TrackShow = () => {
     dispatch(getTrackAnnotations(trackId));
   }, [dispatch, trackId]);
 
+  useEffect(() => {
+    setStartIndex(Math.min(...indices));
+    setEndIndex(Math.max(...indices));
+
+  }, [indices]);
+
+  console.log("Here's what is highlighted:", startIndex, " to ", endIndex);
+
   const startAnAnnotation = async (e) => {
     e.preventDefault();
     const highlighted = window.getSelection();
-    const indices = [highlighted.anchorOffset, highlighted.focusOffset];
-    setStartIndex(Math.min(...indices));
-    setEndIndex(Math.max(...indices));
+    setIndices([highlighted.anchorOffset, highlighted.focusOffset]);
     await setYCoordinate(e.pageY);
     if (startIndex !== endIndex) {
       setAnnotateMode(true);
@@ -43,10 +50,13 @@ const TrackShow = () => {
   };
 
   return track ? (
-    <div className={styles.track__container} onMouseUp={startAnAnnotation}>
+    <div className={styles.track__container}>
       <TrackInfo track={track} sessionUser={sessionUser} />
       <div className={styles.lyrics__container}>
-        <div className={styles.lyrics__container__left}>
+        <div
+          className={styles.lyrics__container__left}
+          onMouseUp={(e) => startAnAnnotation(e)}
+        >
           <TrackEdit
             track={track}
             editMode={editMode}
@@ -55,7 +65,6 @@ const TrackShow = () => {
           />
           <LyricsShow
             editMode={editMode}
-            startAnAnnotation={startAnAnnotation}
             setAnnotateBox={setAnnotateBox}
             setAnnotateMode={setAnnotateMode}
             track={track}

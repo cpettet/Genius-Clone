@@ -25,6 +25,7 @@ const AnnotationForm = ({
 
   const submitAnnotation = (e) => {
     e.preventDefault();
+    console.log("Here's the indices:", [startIndex, endIndex])
     dispatch(createAnnotation({
       authorId,
       trackId,
