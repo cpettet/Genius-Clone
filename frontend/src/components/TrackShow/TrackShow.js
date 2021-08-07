@@ -34,16 +34,17 @@ const TrackShow = () => {
   useEffect(() => {
     setStartIndex(Math.min(...indices));
     setEndIndex(Math.max(...indices));
-
   }, [indices]);
+  console.log("Start index:", startIndex)
+  console.log("End index:", endIndex)
 
-  console.log("Here's what is highlighted:", startIndex, " to ", endIndex);
-
-  const startAnAnnotation = async (e) => {
+  const startAnAnnotation = (e) => {
     e.preventDefault();
-    const highlighted = window.getSelection();
+    const highlighted = window.getSelection().getRangeAt(0);
+    console.log("Highlighted:", highlighted)
     setIndices([highlighted.anchorOffset, highlighted.focusOffset]);
-    await setYCoordinate(e.pageY);
+    setYCoordinate(e.pageY);
+    console.log("Text is highlighted:")
     if (startIndex !== endIndex) {
       setAnnotateMode(true);
     }
@@ -55,7 +56,7 @@ const TrackShow = () => {
       <div className={styles.lyrics__container}>
         <div
           className={styles.lyrics__container__left}
-          onMouseUp={(e) => startAnAnnotation(e)}
+          onMouseUp={startAnAnnotation}
         >
           <TrackEdit
             track={track}
@@ -68,6 +69,7 @@ const TrackShow = () => {
             setAnnotateBox={setAnnotateBox}
             setAnnotateMode={setAnnotateMode}
             track={track}
+            setIndices={setIndices}
           />
           <CommentsShow trackId={trackId} />
         </div>

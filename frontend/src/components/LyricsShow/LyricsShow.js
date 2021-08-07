@@ -1,26 +1,16 @@
-import { useState } from "react";
 import styles from "./LyricsShow.module.css";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import React from "react";
 
-const LyricsShow = ({ editMode, setAnnotateBox, setAnnotateMode, track }) => {
-  const dispatch = useDispatch();
-
+const LyricsShow = ({ editMode, setAnnotateBox, setAnnotateMode, track, setIndices }) => {
   // sorts the annotations in order of start index
   const sortedAnnotations = Object.values(track?.Annotations).sort(
     (a, b) => a.startIndex - b.startIndex
   );
 
-  const sortedStartingIndices = sortedAnnotations.map(
-    (annotation) => annotation.startIndex
-  );
-
   const allSortedIndices = sortedAnnotations.reduce((acc, next) => {
     return [...acc, [next.startIndex, next.endIndex]];
   }, []);
-
-  console.log("All indices in order:", allSortedIndices);
 
   const buildUnannotatedSpan = (characterArray) => {
     const spanOfChars = characterArray.join("");
@@ -37,69 +27,64 @@ const LyricsShow = ({ editMode, setAnnotateBox, setAnnotateMode, track }) => {
     );
   };
 
-  const renderedSpans = [];
-  let pairCount = 0;
-  let currentSpan = [];
-  let inCurrentPair = false;
-  for (let i = 0; i < track.lyrics.length; i++) {
-    const character = track.lyrics[i];
-    const firstToCompare =
-      allSortedIndices[pairCount] && allSortedIndices[pairCount][0];
-    const secondToCompare =
-      allSortedIndices[pairCount] && allSortedIndices[pairCount][1];
-    console.log(
-      "Character:",
-      character,
-      "\nFirst Index:",
-      firstToCompare,
-      "\nSecond Index:",
-      secondToCompare
-    );
-    if (firstToCompare === i) {
-      // entering the start of an annotation
-      renderedSpans.push(buildUnannotatedSpan(currentSpan));
-      inCurrentPair = true;
-      currentSpan = [character];
-    } else if (secondToCompare === i) {
-      // ending an annotation
-      renderedSpans.push(buildAnnotatedSpan(currentSpan, pairCount));
-      inCurrentPair = false;
-      pairCount++;
-      currentSpan = [character];
-    } else if (inCurrentPair) {
-      // characters in annotation
-      currentSpan.push(character);
-    } else if (track.lyrics.length - 1 === i && inCurrentPair) {
-      // last element, in an annotation
-      currentSpan.push(character);
-      renderedSpans.push(buildAnnotatedSpan(currentSpan, pairCount));
-    } else if (track.lyrics.length - 1 === i && !inCurrentPair) {
-      // last element, not in an annotation
-      currentSpan.push(character);
-      renderedSpans.push(buildUnannotatedSpan(currentSpan));
-    } else {
-      // characters not in annotation
-      currentSpan.push(character);
+  const renderSpans = () => {
+    const renderedSpans = [];
+    let pairCount = 0;
+    let currentSpan = [];
+    let inCurrentPair = false;
+    const charsInTrack = track.lyrics.length;
+
+    for (let i = 0; i < charsInTrack; i++) {
+      const character = track.lyrics[i];
+      const firstToCompare =
+        allSortedIndices[pairCount] && allSortedIndices[pairCount][0];
+      const secondToCompare =
+        allSortedIndices[pairCount] && allSortedIndices[pairCount][1];
+      // console.log("Iteration #", i)
+      // console.log("Here's the comparisons:", [firstToCompare, secondToCompare])
+      console.log(`At iteration ${i}, we have span: ${currentSpan.join("")}`);
+      if (firstToCompare === i) {
+        // entering the start of an annotation
+        console.log("compare:", firstToCompare)
+        console.log("iteration:", i)
+        renderedSpans.push(buildUnannotatedSpan(currentSpan));
+        inCurrentPair = true;
+        currentSpan = [character];
+      } else if (secondToCompare === i) {
+        // ending an annotation
+        renderedSpans.push(buildAnnotatedSpan(currentSpan, pairCount));
+        inCurrentPair = false;
+        pairCount++;
+        currentSpan = [character];
+        console.log(`At iteration ${i}, we have span: ${currentSpan.join("")}`)
+      } else if (track.lyrics.length - 1 === i && inCurrentPair) {
+        // last element, in an annotation
+        currentSpan.push(character);
+        renderedSpans.push(buildAnnotatedSpan(currentSpan, pairCount));
+      } else if (track.lyrics.length - 1 === i && !inCurrentPair) {
+        // last element, not in an annotation
+        currentSpan.push(character);
+        renderedSpans.push(buildUnannotatedSpan(currentSpan));
+      } else {
+        currentSpan.push(character);
+      }
     }
+    return React.Children.toArray(renderedSpans);
   }
-  console.log("Rendered spans:", renderedSpans);
+
 
   return (
     <>
-      <h3>Here's where the rendered spans start</h3>
-      <p
-        className={styles.track__lyrics}
-      >{React.Children.toArray(renderedSpans)}</p>
-      <h3>Here's where the lyrics start</h3>
       <p
         hidden={editMode}
         onMouseDown={() => {
           setAnnotateMode(false);
           setAnnotateBox(false);
+          setIndices([]);
         }}
         className={styles.track__lyrics}
       >
-        {track.lyrics}
+        {renderSpans()}
       </p>
     </>
   );

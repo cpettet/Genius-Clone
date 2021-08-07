@@ -25,23 +25,32 @@ const AnnotationForm = ({
 
   const submitAnnotation = (e) => {
     e.preventDefault();
-    console.log("Here's the indices:", [startIndex, endIndex])
-    dispatch(createAnnotation({
-      authorId,
-      trackId,
-      content: newAnnotation,
-      startIndex,
-      endIndex,
-    }))
+    console.log("Before dispatching:")
+    console.log("Start:", startIndex)
+    console.log("End:", endIndex)
+    dispatch(
+      createAnnotation({
+        authorId,
+        trackId,
+        content: newAnnotation,
+        startIndex,
+        endIndex,
+      })
+    );
     setNewAnnotation("");
     setAnnotateMode(false);
   };
+
+  const showAnnotationForm = (e) => {
+    e.preventDefault();
+    setAnnotateBox(prev => true);
+  }
 
   return (
     <div className={styles.annotation} style={{ top: yCoordinate - 465 }}>
       <button
         hidden={annotateBox}
-        onClick={() => setAnnotateBox(true)}
+        onClick={showAnnotationForm}
         className={styles["annotation__start-annotation"]}
       >
         Start the Folk Genius Annotation
