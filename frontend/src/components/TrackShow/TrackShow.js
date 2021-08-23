@@ -35,19 +35,17 @@ const TrackShow = () => {
     setStartIndex(Math.min(...indices));
     setEndIndex(Math.max(...indices));
   }, [indices]);
-  console.log("Start index:", startIndex)
-  console.log("End index:", endIndex)
+
+  useEffect(() => {
+    if (startIndex !== endIndex) setAnnotateMode(true);
+    else setAnnotateMode(false);
+  }, [startIndex, endIndex]);
 
   const startAnAnnotation = (e) => {
     e.preventDefault();
     const highlighted = window.getSelection().getRangeAt(0);
-    console.log("Highlighted:", highlighted)
-    setIndices([highlighted.anchorOffset, highlighted.focusOffset]);
+    setIndices([highlighted.startOffset, highlighted.endOffset]);
     setYCoordinate(e.pageY);
-    console.log("Text is highlighted:")
-    if (startIndex !== endIndex) {
-      setAnnotateMode(true);
-    }
   };
 
   return track ? (

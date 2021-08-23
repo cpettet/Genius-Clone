@@ -21,8 +21,8 @@ const LyricsShow = ({ editMode, setAnnotateBox, setAnnotateMode, track, setIndic
   const buildAnnotatedSpan = (characterArray, pairCount) => {
     const spanOfChars = characterArray.join("");
     return (
-      <Link to={`/tracks/${track.id}/#${sortedAnnotations[pairCount].id}`}>
-        <span className={styles.lyrics__annotated}>{spanOfChars}</span>
+      <Link key={pairCount} to={`/tracks/${track.id}/#${sortedAnnotations[pairCount].id}`}>
+        <span key={pairCount} className={styles.lyrics__annotated}>{spanOfChars}</span>
       </Link>
     );
   };
@@ -40,13 +40,7 @@ const LyricsShow = ({ editMode, setAnnotateBox, setAnnotateMode, track, setIndic
         allSortedIndices[pairCount] && allSortedIndices[pairCount][0];
       const secondToCompare =
         allSortedIndices[pairCount] && allSortedIndices[pairCount][1];
-      // console.log("Iteration #", i)
-      // console.log("Here's the comparisons:", [firstToCompare, secondToCompare])
-      console.log(`At iteration ${i}, we have span: ${currentSpan.join("")}`);
       if (firstToCompare === i) {
-        // entering the start of an annotation
-        console.log("compare:", firstToCompare)
-        console.log("iteration:", i)
         renderedSpans.push(buildUnannotatedSpan(currentSpan));
         inCurrentPair = true;
         currentSpan = [character];
@@ -56,7 +50,6 @@ const LyricsShow = ({ editMode, setAnnotateBox, setAnnotateMode, track, setIndic
         inCurrentPair = false;
         pairCount++;
         currentSpan = [character];
-        console.log(`At iteration ${i}, we have span: ${currentSpan.join("")}`)
       } else if (track.lyrics.length - 1 === i && inCurrentPair) {
         // last element, in an annotation
         currentSpan.push(character);
