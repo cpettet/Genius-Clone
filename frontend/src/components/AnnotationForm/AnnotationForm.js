@@ -25,9 +25,6 @@ const AnnotationForm = ({
 
   const submitAnnotation = (e) => {
     e.preventDefault();
-    console.log("Before dispatching:")
-    console.log("Start:", startIndex)
-    console.log("End:", endIndex)
     dispatch(
       createAnnotation({
         authorId,

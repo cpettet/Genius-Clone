@@ -10,6 +10,7 @@ const LyricsShow = ({
   track,
   setIndices,
   setYCoordinate,
+  yCoordinate,
 }) => {
   const history = useHistory();
   // sorts the annotations in order of start index
@@ -29,7 +30,7 @@ const LyricsShow = ({
         onClick={() => {
           setAnnotateMode(false);
           setAnnotateBox(false);
-          history.push(`/tracks/${track.id}`)
+          history.push(`/tracks/${track.id}`);
         }}
         className={styles.lyrics__unannotated}
       >
@@ -43,7 +44,10 @@ const LyricsShow = ({
     return (
       <Link
         key={pairCount}
-        to={`/tracks/${track.id}/${sortedAnnotations[pairCount].id}`}
+        to={{
+          pathname: `/tracks/${track.id}/${sortedAnnotations[pairCount].id}`,
+          yCoordinate: yCoordinate,
+        }}
         onClick={(e) => setYCoordinate(e.pageY)}
       >
         <span key={pairCount} className={styles.lyrics__annotated}>

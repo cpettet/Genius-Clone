@@ -74,6 +74,7 @@ const TrackShow = () => {
             track={track}
             setIndices={setIndices}
             setYCoordinate={setYCoordinate}
+            yCoordinate={yCoordinate}
           />
           <CommentsShow trackId={trackId} />
         </div>
