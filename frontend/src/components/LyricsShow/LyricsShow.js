@@ -1,8 +1,15 @@
+import React from "react";
 import styles from "./LyricsShow.module.css";
 import { Link } from "react-router-dom";
-import React from "react";
 
-const LyricsShow = ({ editMode, setAnnotateBox, setAnnotateMode, track, setIndices }) => {
+const LyricsShow = ({
+  editMode,
+  setAnnotateBox,
+  setAnnotateMode,
+  track,
+  setIndices,
+  setYCoordinate,
+}) => {
   // sorts the annotations in order of start index
   const sortedAnnotations = Object.values(track?.Annotations).sort(
     (a, b) => a.startIndex - b.startIndex
@@ -21,8 +28,14 @@ const LyricsShow = ({ editMode, setAnnotateBox, setAnnotateMode, track, setIndic
   const buildAnnotatedSpan = (characterArray, pairCount) => {
     const spanOfChars = characterArray.join("");
     return (
-      <Link key={pairCount} to={`/tracks/${track.id}/#${sortedAnnotations[pairCount].id}`}>
-        <span key={pairCount} className={styles.lyrics__annotated}>{spanOfChars}</span>
+      <Link
+        key={pairCount}
+        to={`/tracks/${track.id}/${sortedAnnotations[pairCount].id}`}
+        onClick={(e) => setYCoordinate(e.pageY)}
+      >
+        <span key={pairCount} className={styles.lyrics__annotated}>
+          {spanOfChars}
+        </span>
       </Link>
     );
   };
@@ -63,8 +76,7 @@ const LyricsShow = ({ editMode, setAnnotateBox, setAnnotateMode, track, setIndic
       }
     }
     return React.Children.toArray(renderedSpans);
-  }
-
+  };
 
   return (
     <>

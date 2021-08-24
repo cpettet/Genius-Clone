@@ -25,7 +25,10 @@ function App() {
         <Route path="/tracks/new">
           <TrackForm />
         </Route>
-        <Route path="/tracks/:id(\d+)">
+        <Route path="/tracks/:id/:annoId">
+          <TrackShow />
+        </Route>
+        <Route path="/tracks/:id">
           <TrackShow />
         </Route>
       </Switch>

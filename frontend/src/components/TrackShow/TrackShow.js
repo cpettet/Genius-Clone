@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styles from "./track-show.module.css";
 import CommentsShow from "../Comments/CommentsShow";
+import AnnotationShow from "../AnnotationShow";
 import TrackInfo from "../TrackInfo";
 import Error404 from "../Error404";
 import { getTrack } from "../../store/track";
@@ -15,6 +16,8 @@ import { getTrackAnnotations } from "../../store/annotation";
 const TrackShow = () => {
   const dispatch = useDispatch();
   const trackId = useParams().id;
+  const annotationId = useParams().annoId;
+  console.log("annotation id:", annotationId)
   const track = useSelector((state) => state.tracks?.byId[trackId]);
   const [indices, setIndices] = useState([]);
   const [editMode, setEditMode] = useState(false);
@@ -37,15 +40,18 @@ const TrackShow = () => {
   }, [indices]);
 
   useEffect(() => {
-    if (startIndex !== endIndex) setAnnotateMode(true);
+    if (startIndex !== endIndex && startIndex !== Infinity) setAnnotateMode(true);
     else setAnnotateMode(false);
   }, [startIndex, endIndex]);
 
   const startAnAnnotation = (e) => {
     e.preventDefault();
-    const highlighted = window.getSelection().getRangeAt(0);
-    setIndices([highlighted.startOffset, highlighted.endOffset]);
-    setYCoordinate(e.pageY);
+    const selection = window.getSelection && window.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      const highlighted = selection.getRangeAt(0);
+      setIndices([highlighted.startOffset, highlighted.endOffset]);
+      setYCoordinate(e.pageY);
+    }
   };
 
   return track ? (
@@ -68,11 +74,12 @@ const TrackShow = () => {
             setAnnotateMode={setAnnotateMode}
             track={track}
             setIndices={setIndices}
+            setYCoordinate={setYCoordinate}
           />
           <CommentsShow trackId={trackId} />
         </div>
         <div className={styles.lyrics__container__right}>
-          <div>About "{track?.title}"...</div>
+          <div className={styles.about__track}>About "{track?.title}"...</div>
           {annotateMode && (
             <AnnotationForm
               annotateBox={annotateBox}
@@ -84,6 +91,9 @@ const TrackShow = () => {
               trackId={trackId}
               sessionUser={sessionUser}
             />
+          )}
+          {annotationId && (
+            <AnnotationShow />
           )}
         </div>
       </div>
