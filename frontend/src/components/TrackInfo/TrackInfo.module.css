@@ -1,7 +1,10 @@
 .track__info {
-    display: flex;
-    justify-content: center;
-    background-color: #97C34B;
+  display: flex;
+  justify-content: center;
+  background-color: #97c34b;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .track {
@@ -12,46 +15,50 @@
 }
 
 .track__overlay {
-    background: linear-gradient(0deg, #00000088 50%, #ffffff44 100%);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
+  background: linear-gradient(0deg, #00000088 50%, #ffffff44 100%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 .information__container {
-    width: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+  width: 100%;
 }
 
 .information__album-art {
-    height: 220px;
-    width: 220px;
-    padding: 1px;
-    background-color: grey;
-    border: 2px solid #5A8611;
+  position: relative;
+  left: -4rem;
+  height: 220px;
+  width: 220px;
+  padding: 1px;
+  margin-right: 2rem;
+  background-color: grey;
+  border: 2px solid #5a8611;
+}
+
+.track__overlay__text {
+  position: relative;
+  right: 4rem;
 }
 
 .track__title {
-    color: #5A8611;
+  color: #5a8611;
 }
 
 .track__artist {
-    color: white;
+  color: white;
 }
 
 .track__minor {
-    color: #FAC08A;
+  color: #fac08a;
 }
 
 .track__minor__subtext {
-    color: white;
+  color: white;
 }
 
 button + button {
-    margin-left: 0.5rem;
+  margin-left: 0.5rem;
 }

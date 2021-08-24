@@ -3,12 +3,12 @@ import styles from "./TrackInfo.module.css";
 
 export default function TrackInfo({ track, sessionUser }) {
   return (
-    <div className={styles.track__info}>
+    <div
+      className={styles.track__info}
+      style={{ backgroundImage: `url(${track?.albumArtLink})` }}
+    >
       <div className={styles.track}>
-        <div
-          className={styles.information__container}
-          style={{ backgroundImage: `url(${track?.albumArtLink})` }}
-        >
+        <div className={styles.information__container}>
           <div className={styles.track__overlay}>
             <img
               src={track?.albumArtLink}

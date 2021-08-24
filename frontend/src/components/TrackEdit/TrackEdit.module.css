@@ -1,5 +1,5 @@
 .edit-lyrics-buttons {
-    background-color: #D28F51;
+    background-color: #ffffff;
     border: 2px solid black;
     margin-top: 1.5rem;
     margin-bottom: 3rem;
@@ -13,12 +13,11 @@ button + button {
 }
 
 .edit-lyrics-buttons:hover {
-    background-color: #914F13;
+    background-color: #e9e9e9;
 }
 
 .input-container__warning {
-    border: 2px solid fuchsia;
-    background-color: #574190;
+    background-color: #e9e9e9;
     color: white;
     margin-bottom: 2rem;
     padding: 0.5rem;
@@ -28,6 +27,5 @@ button + button {
     height: 800px;
     width: 500px;
     overflow-y: scroll;
-    border: 2px solid fuchsia;
     font-size: 1.0rem;
 }
