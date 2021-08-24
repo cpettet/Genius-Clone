@@ -17,7 +17,6 @@ const TrackShow = () => {
   const dispatch = useDispatch();
   const trackId = useParams().id;
   const annotationId = useParams().annoId;
-  console.log("annotation id:", annotationId)
   const track = useSelector((state) => state.tracks?.byId[trackId]);
   const [indices, setIndices] = useState([]);
   const [editMode, setEditMode] = useState(false);

@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router";
 import styles from "./LyricsShow.module.css";
 import { Link } from "react-router-dom";
 
@@ -10,6 +11,7 @@ const LyricsShow = ({
   setIndices,
   setYCoordinate,
 }) => {
+  const history = useHistory();
   // sorts the annotations in order of start index
   const sortedAnnotations = Object.values(track?.Annotations).sort(
     (a, b) => a.startIndex - b.startIndex
@@ -22,7 +24,18 @@ const LyricsShow = ({
   const buildUnannotatedSpan = (characterArray) => {
     const spanOfChars = characterArray.join("");
 
-    return <span className={styles.lyrics__unannotated}>{spanOfChars}</span>;
+    return (
+      <span
+        onClick={() => {
+          setAnnotateMode(false);
+          setAnnotateBox(false);
+          history.push(`/tracks/${track.id}`)
+        }}
+        className={styles.lyrics__unannotated}
+      >
+        {spanOfChars}
+      </span>
+    );
   };
 
   const buildAnnotatedSpan = (characterArray, pairCount) => {
