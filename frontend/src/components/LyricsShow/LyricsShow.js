@@ -46,11 +46,11 @@ const LyricsShow = ({
         key={pairCount}
         to={{
           pathname: `/tracks/${track.id}/${sortedAnnotations[pairCount].id}`,
-          yCoordinate: yCoordinate,
         }}
         onClick={(e) => setYCoordinate(e.pageY)}
+        className={styles.lyrics__annotated}
       >
-        <span key={pairCount} className={styles.lyrics__annotated}>
+        <span key={pairCount}>
           {spanOfChars}
         </span>
       </Link>

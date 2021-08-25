@@ -1,12 +1,14 @@
 .track__lyrics {
   white-space: pre-wrap;
-  background-color: slateblue;
-}
-
-.lyrics__unannotated {
-
 }
 
 .lyrics__annotated {
-  background-color: green;
+  background-color: #cecece;
+  text-decoration: none;
+  color: black;
+}
+
+.lyrics__annotated:focus {
+  color: unset;
+  background-color: #ffff64;
 }

@@ -1,6 +1,7 @@
 .annotation {
     border-left: 0.2rem solid #99a7ee;
     padding: 1rem;
+    position: relative;
 }
 
 .contributor__span {

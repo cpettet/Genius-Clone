@@ -22,13 +22,13 @@ function App() {
         <Route exact path="/">
           <TracksChart />
         </Route>
-        <Route path="/tracks/new">
+        <Route exact path="/tracks/new">
           <TrackForm />
         </Route>
         <Route path="/tracks/:id/:annoId">
           <TrackShow />
         </Route>
-        <Route path="/tracks/:id">
+        <Route exact path="/tracks/:id">
           <TrackShow />
         </Route>
       </Switch>
