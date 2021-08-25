@@ -1,0 +1,16 @@
+.annotation {
+    border-left: 0.2rem solid #99a7ee;
+    padding: 1rem;
+    position: relative;
+}
+
+.contributor__span {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.contributor {
+    background-color: #e9e9e9;
+    padding: 0.25rem;
+    margin: 0;
+}

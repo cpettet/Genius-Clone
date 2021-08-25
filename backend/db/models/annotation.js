@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       authorId: { type: DataTypes.INTEGER, allowNull: false },
       trackId: { type: DataTypes.INTEGER, allowNull: false },
       content: { type: DataTypes.TEXT, allowNull: false, unique: true },
+      startIndex: { type: DataTypes.INTEGER, allowNull: false },
+      endIndex: { type: DataTypes.INTEGER, allowNull: false },
     },
     {}
   );

@@ -31,9 +31,7 @@ const validateTrack = [
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const tracks = await Track.findAll({
-      limit: 10,
-    });
+    const tracks = await Track.findAll();
     return await res.json(tracks);
   })
 );

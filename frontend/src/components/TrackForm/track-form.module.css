@@ -1,35 +1,41 @@
 .form__header {
-    align-content: flex-start;
-    text-transform: uppercase;
-    border-bottom: 1px solid black;
-    width: 100%;
-    margin: 0px;
+  align-content: flex-start;
+  text-transform: uppercase;
+  border-bottom: 1px solid black;
+  width: 100%;
+  margin: 0px;
 }
 
 .input-container {
-    display: flex;
-    flex-direction: column;
-    margin: 0.25rem;
-    margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0.25rem;
+  margin-top: 1rem;
+}
 
+.form__container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 h1 {
-    width: 100%;
+  width: 100%;
 }
 
 label {
-    text-transform: uppercase;
-    font-size: 0.75rem;
+  text-transform: uppercase;
+  font-size: 0.75rem;
 }
 
 .lyrics {
-    min-height: 500px;
+  min-height: 500px;
 }
 
 .submit {
-    background-color: #5b8612;
-    border-radius: 5px;
-    height: 1.5rem;
-    width: 4rem;
+  background-color: #ffff64;
+  border-radius: 5px;
+  height: 1.5rem;
+  width: 4rem;
 }

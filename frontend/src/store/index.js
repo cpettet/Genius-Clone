@@ -5,12 +5,14 @@ import sessionReducer from "./session";
 import comments from "./comment";
 import tracks from "./track";
 import users from "./user";
+import annotations from "./annotation";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   comments,
   tracks,
   users,
+  annotations,
 });
 
 let enhancer;

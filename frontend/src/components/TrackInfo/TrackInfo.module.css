@@ -1,0 +1,63 @@
+.track__info {
+  display: flex;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.track {
+  display: flex;
+  justify-content: center;
+  width: 67%;
+  height: 20rem;
+}
+
+.track__overlay {
+  background: linear-gradient(0deg, #00000088 50%, #ffffff44 100%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.information__container {
+  width: 100%;
+}
+
+.information__album-art {
+  position: relative;
+  left: -4rem;
+  height: 220px;
+  width: 220px;
+  padding: 1px;
+  margin-right: 2rem;
+  background-color: grey;
+  border: 2px solid #5a8611;
+}
+
+.track__overlay__text {
+  position: relative;
+  right: 4rem;
+}
+
+.track__title {
+  color: white;
+}
+
+.track__artist {
+  color: white;
+}
+
+.track__minor {
+  color: #fac08a;
+}
+
+.track__minor__subtext {
+  color: white;
+}
+
+button + button {
+  margin-left: 0.5rem;
+}
